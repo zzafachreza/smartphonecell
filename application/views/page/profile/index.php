@@ -3,7 +3,7 @@
     /* Styling header */
     .header-container {
         padding: 10px;
-        background-color: #172169;
+        background-color: #0148A8;
         width: 100%;
         position: fixed;
         top: 0;
@@ -120,7 +120,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
-    background-color: #172169;
+    background-color: #0148A8;
     border-radius: 30px 30px 0 0;
     z-index: 1000;
     box-sizing: border-box; /* Menjaga padding dalam batasan lebar */
@@ -182,7 +182,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
-    background-color: #172169;
+    background-color: #0148A8;
     border-radius:30px 30px 0px 0px;
     z-index: 1000;
     box-sizing: border-box; /* Menjaga padding dalam batasan lebar */
@@ -282,7 +282,9 @@
       
 <div class="footer-dashboard">
             <div class="icon-container">
-                <i class="fas fa-home icon"></i>
+             <a href="<?= base_url('Dashboard') ?>">
+             <i class="fas fa-home icon"></i>
+             </a>
             </div>
             <div class="icon-container">
                 <a href="https://wa.me/6281319456595">

@@ -427,7 +427,7 @@
                         </div> 
                     </a>
                 
-                    <a style="text-decoration:none; color:black;" href="<?= base_url('misilevel') ?>">
+                    <a style="text-decoration:none; color:black;" href="<?= base_url('Misilevel') ?>">
                         <div class="menu-container">
                             <div>
                                 <img class="img-menu" src="assets/img/icon/misilevel.png">

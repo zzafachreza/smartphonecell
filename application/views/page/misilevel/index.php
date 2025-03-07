@@ -177,7 +177,7 @@
             </div>
 
             <!-- ALL Level -->
-            <a href="<?php echo base_url('misilevel/level') ?>">
+            <a href="<?php echo base_url('Misilevel/level') ?>">
                 <div class="level-btn-all">
                     <h3>Level 1</h3>
                 </div>

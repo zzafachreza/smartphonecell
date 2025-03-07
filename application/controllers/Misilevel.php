@@ -1,187 +1,423 @@
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: 'Poppins', sans-serif;
-        color: black;
-        box-sizing: border-box; /* Pastikan padding dan border tidak memengaruhi lebar */
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Misilevel extends CI_Controller
+{
+
+
+    function __construct()
+    {
+
+        parent::__construct();
+    }
+    
+       function modul(){
+        return 'sewa';
+    }
+    
+   public function index()
+{
+    $data['title'] = 'Produk Smartphone';
+    $data['data_pengguna'] = $this->db->get_where('data_pengguna', ['username' =>
+    $this->session->userdata('username')])->row_array();
+
+    // Langsung tampilkan view tanpa pengecekan role_id
+    $this->load->view('templates/header', $data);
+    // $this->load->view('topbar', $data);
+    $this->load->view('page/misilevel/index', $data);
+    $this->load->view('templates/footer');
+}
+
+    public function level()
+    {
+        $data['title'] = 'Input Costumer';
+        $data['data_pengguna'] = $this->db->get_where('data_pengguna', ['username' =>
+        $this->session->userdata('username')])->row_array();
+
+
+        $this->load->view('templates/header', $data);
+        // $this->load->view('topbar', $data);
+        $this->load->view('page/misilevel/level', $data);
+        $this->load->view('templates/footer');
     }
 
-    .container {
-        padding: 10px;
+    public function bundling()
+    {
+        $data['title'] = 'Input Costumer';
+        $data['data_pengguna'] = $this->db->get_where('data_pengguna', ['username' =>
+        $this->session->userdata('username')])->row_array();
+
+
+        $this->load->view('templates/header', $data);
+        // $this->load->view('topbar', $data);
+        $this->load->view('page/misilevel/budling', $data);
+        $this->load->view('templates/footer');
     }
 
-    header {
-        padding: 10px;
-        background-color: #0148A8;
+    public function checkout()
+    {
+        $data['title'] = 'Input Costumer';
+        $data['data_pengguna'] = $this->db->get_where('data_pengguna', ['username' =>
+        $this->session->userdata('username')])->row_array();
+
+
+        $this->load->view('templates/header', $data);
+        // $this->load->view('topbar', $data);
+        $this->load->view('page/misilevel/checkout', $data);
+        $this->load->view('templates/footer');
     }
 
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        padding: 10px;
+
+
+     public function edit()
+    {
+        $data['title'] = 'Input Costumer';
+        $data['data_pengguna'] = $this->db->get_where('data_pengguna', ['username' =>
+        $this->session->userdata('username')])->row_array();
+
+
+        $this->load->view('templates/header', $data);
+        // $this->load->view('topbar', $data);
+        $this->load->view('page/outputdata/edit', $data);
+        $this->load->view('templates/footer');
     }
 
-    .header-title {
-        color: white;
-        font-size: 25px;
-        flex-grow: 1; /* Allow title to take available space */
-        text-align: center; /* Center title */
+    public function output()
+
+    {
+        $data['title'] = 'Ouput Costumer';
+        $data['memberadmin'] = $this->db->get_where('data_pengguna', ['username' =>
+        $this->session->userdata('username')])->row_array();
+
+
+        $this->load->view('templates/header', $data);
+        // $this->load->view('topbar', $data);
+        $this->load->view('page/outputdata/output', $data);
+        $this->load->view('templates/footer');
     }
 
-    .arrow-left {
-        width: 20px;
-        height: 30px;
-    }
 
-    .search-input {
-        width: 100%; /* Full width */
-        padding: 10px 15px; /* Padding for input */
-        border: 1px solid #ccc; /* Input border */
-        border-radius: 20px; /* Border radius */
-        font-family: 'Poppins', sans-serif;
-        font-size: 14px; /* Font size */
-        outline: none; /* Remove outline on focus */
-    }
+     public function uploadFoto($name_data,$ref_user){
 
-    .misi-level-container {
-        padding: 10px;
-    }
-
- 
-    .level-btn-contianer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px; /* Jarak antara tombol */
-        padding: 10px;
-    }
-    .level-btn {
-        background-color: #f0f0f0;
-        color: black;
-        border-radius: 10px;
-        padding: 10px 20px; /* Padding lebih besar */
-        text-align: center;
-        font-size: 16px; /* Ukuran font lebih besar */
-        flex: 1; /* Membagi ruang secara merata */
-        text-decoration: none; /* Hilangkan underline pada link */
-        min-width: 150px; /* Lebar minimum untuk tombol */
-    }
-
-    .level-btn-all {
-        background-color: #0148A8;
-        color: white;
-        border-radius: 50px;
-        padding: 10px 20px;
-        text-align: center;
-        font-size: 16px;
-        margin: 10px 0;
-        display: block;
-        width: 100%;
-        text-decoration: none; /* Hilangkan underline pada link */
-    }
-
-    .level-btn h3 {
-        margin: 0;
-        font-size: 16px; /* Ukuran font yang konsisten */
-    }
-
-    .level-btn-all h3 {
-        color: white;
-        font-size: 16px;
-    }
-
-    @media (max-width: 480px) {
-        .header-title {
-            font-size: 18px; /* Further reduce font size for very small screens */
-            text-align: center; /* Center title */
+    error_reporting(0);
+         $target_dir = "datafoto/";
+      
+        $ext = $target_dir .date('ymdhis').basename($_FILES[$name_data]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($ext,PATHINFO_EXTENSION));
+        
+          $target_file = $target_dir .sha1(md5(date('ymdhis').$ref_user.$name_data)).'.'.$imageFileType;
+    
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+          $check = getimagesize($_FILES[$name_data]["tmp_name"]);
+          if($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+          } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+          }
         }
-
-        .search-input {
-            font-size: 10px; /* Further reduce font size for input */
-            padding: 6px 10px; /* Further adjust padding */
+    
+        // Check if file already exists
+        if (file_exists($target_file)) {
+          echo "Sorry, file already exists.";
+          $uploadOk = 0;
         }
-
-        .list-smartphone-container h3 {
-            font-size: 12px; /* Further reduce font size for list items */
+    
+        // Check file size
+        if ($_FILES[$name_data]["size"] > 12000000) {
+          echo "Sorry, your file is too large.";
+          $uploadOk = 0;
         }
-
-        nav {
-            flex-direction: flex; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-            padding: 5px; /* Reduce padding for nav */
+    
+      
+    
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+          echo "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
+        } else {
+          if (move_uploaded_file($_FILES[$name_data]["tmp_name"], $target_file)) {
+          //  echo "The file ". basename( $_FILES["foto"]["name"]). " has been uploaded.";
+            return $target_file;
+          } else {
+            echo "Sorry, there was an error uploading your file.";
+          }
         }
+    }   
 
-        .header-btn-back {
-            margin-bottom: 5px; /* Add space below the back button */
-        }
 
-        .arrow-left {
-            width: 16px; /* Adjust arrow size for small screens */
-            height: 24px; /* Adjust arrow size for small screens */
-        }
-        .level-btn-contianer {
-            flex-direction: row; /* Tetap menggunakan flexbox horizontal di mobile */
-            gap: 10px; /* Jarak antara tombol */
-        }
+    function update(){
 
-        .level-btn,
-        .level-btn-all {
-            width: auto; /* Lebar menyesuaikan konten */
-            padding: 8px 15px; /* Padding lebih kecil */
-            font-size: 14px; /* Ukuran font lebih kecil */
-            min-width: 120px; /* Lebar minimum untuk mobile */
+            date_default_timezone_set('Asia/Jakarta');
+
+            $id_sewa = $_POST['id_sewa'];
+
+            $nama_customer = $_POST['nama_customer'];
+            $telepon_customer = $_POST['telepon_customer'];
+            $jaminan = $_POST['jaminan'];
+            $paket_sewa = $_POST['paket_sewa'];
+            $tanggal_ambil = $_POST['tanggal_ambil'];
+            $jam_ambil = explode("T", $tanggal_ambil)[1];
+            $tanggal_kembali = $_POST['tanggal_kembali'];
+            $jam_kembali = explode("T", $tanggal_kembali)[1];
+            $jenis = $_POST['jenis'];
+            $kelengkapan = implode(",", $_POST['kelengkapan']);
+            $nomor_helm = $_POST['nomor_helm'];
+            
+
+
+            $kendaraan = $this->db->query("SELECT * FROM data_kendaraan WHERE jenis_kendaraan='$jenis'")->row_object();
+
+
+            $tanggal1 = new DateTime($tanggal_ambil);
+                $tanggal2 = new DateTime($tanggal_kembali);
+
+
+
+            if($paket_sewa=='Perjam'){
+          
+                $harga=$kendaraan->perjam;
+                $biaya = 0;
+            }else if($paket_sewa=='Perhari'){
+                
+
+                $selisih = $tanggal1->diff($tanggal2)->days;
+
+
+                $harga=$kendaraan->perhari;
+                $biaya = $selisih*$harga;
+
+
+            }else if($paket_sewa=='Perminggu'){
+                $harga=$kendaraan->perminggu;
+                $selisih = floor($tanggal1->diff($tanggal2)->days/7);
+                 
+                $biaya=$selisih*$harga;
+            }
+
+
+            // hitung durasi
+            $tanggaljam1 = new DateTime(substr($tanggal_ambil, 0,10).' '.$jam_ambil);
+            $tanggaljam2 = new DateTime(substr($tanggal_kembali, 0,10).' '.$jam_kembali);
+
+            $selisihjam = $tanggaljam1->diff($tanggaljam2);
+            $durasi = ($selisihjam->days * 24) + $selisihjam->h;
+
+
+            if (!empty($_FILES['foto_sewa']) && $_FILES['foto_sewa']['error'] == 0) {
+                $foto_sewa = $this->uploadFoto('foto_sewa', date('ymdhis'));
+                $sql = "UPDATE data_sewa SET
+                            nama_customer='$nama_customer',
+                            telepon_customer='$telepon_customer',
+                            jaminan='$jaminan',
+                            paket='$paket_sewa',
+                            tanggal_ambil='$tanggal_ambil',
+                            jam_ambil='$jam_ambil',
+                            tanggal_kembali='$tanggal_kembali',
+                            jam_kembali='$jam_kembali',
+                            jenis='$jenis',
+                            kelengkapan='$kelengkapan',
+                            nomor_helm='$nomor_helm',
+                            foto_sewa='$foto_sewa',
+                            durasi='$durasi',
+                            biaya='$biaya'
+                        WHERE id_sewa='$id_sewa'";
+            } else {
+                $sql = "UPDATE data_sewa SET
+                            nama_customer='$nama_customer',
+                            telepon_customer='$telepon_customer',
+                            jaminan='$jaminan',
+                            paket='$paket_sewa',
+                            tanggal_ambil='$tanggal_ambil',
+                            jam_ambil='$jam_ambil',
+                            tanggal_kembali='$tanggal_kembali',
+                            jam_kembali='$jam_kembali',
+                            jenis='$jenis',
+                            kelengkapan='$kelengkapan',
+                            nomor_helm='$nomor_helm',
+                            durasi='$durasi',
+                            biaya='$biaya'
+                        WHERE id_sewa='$id_sewa'";
+            }
+
+
+
+
+
+
+
+            if($this->db->query($sql)){
+                 $this->session->set_flashdata('update', ' Data berhasil di update !');
+                    redirect('outputdata'); 
+            
+            }
+
+
+
+    }
+
+    function status(){
+            date_default_timezone_set('Asia/Jakarta');
+        $id_sewa = $this->uri->segment(3);
+        $cek = $this->db->query("SELECT * FROM data_sewa a JOIN data_kendaraan b ON a.jenis = b.jenis_kendaraan WHERE id_sewa='$id_sewa'")->row_object();
+        print_r($cek);
+        if($cek->paket=='Perjam'){
+
+            $tanggaljam1 = new DateTime($cek->tanggal_ambil.' '.$cek->jam_ambil);
+            $tanggaljam2 = new DateTime();
+
+            $selisihjam = $tanggaljam1->diff($tanggaljam2);
+            $durasi = $selisihjam->h;
+            $biaya = $cek->perjam*$durasi;
+
+            $sql="UPDATE data_sewa SET status='Selesai',durasi='$durasi',biaya='$biaya',tanggal_kembali='".date('Y-m-d')."',jam_kembali='".date('H:i')."' WHERE id_sewa='$id_sewa'";
+        }else{
+            $sql="UPDATE data_sewa SET status='Selesai' WHERE id_sewa='$id_sewa'";
         }
 
         
-        .level-btn h3 {
-            font-size: 14px; /* Ukuran font lebih kecil */
-      
-        }
+        
 
-        .level-btn-all h3{
-            font-size: 14px; /* Adjust font size for small screens */
-            color: white;
-        }
+
+         if($this->db->query($sql)){
+                 $this->session->set_flashdata('update', ' Data berhasil di update !');
+                    redirect('outputdata/output/'.$cek->kode); 
+            }
+
     }
-</style>
 
-<header>
-    <nav>
-        <a class="header-btn-back" href="<?= base_url('Dashboard') ?>">
-            <img class="arrow-left" src="assets/img/icon/left-arrow.png" alt="arrow-back">
-        </a>
-        <h3 class="header-title">Misi Level</h3>
-        <div style="padding: 10px;"></div>
-    </nav>
-</header>
+    function insert(){
+        date_default_timezone_set('Asia/Jakarta');
+      
+            $kode = date('ymdhis');
+            $nama_customer = $_POST['nama_customer'];
+            $telepon_customer = $_POST['telepon_customer'];
+            $jaminan = $_POST['jaminan'];
+            $paket_sewa = $_POST['paket_sewa'];
+            $tanggal_ambil = $_POST['tanggal_ambil'];
+            $jam_ambil = explode("T", $tanggal_ambil)[1];
+            $tanggal_kembali = $_POST['tanggal_kembali'];
+            $jam_kembali = explode("T", $tanggal_kembali)[1];
+            $jenis = $_POST['jenis'];
+            $kelengkapan = implode(",", $_POST['kelengkapan']);
+            $nomor_helm = $_POST['nomor_helm'];
+            $foto_sewa = $this->uploadFoto('foto_sewa',date('ymdhis'));
 
-<div class="container">
-    <!-- List Misi Level -->
-    <div class="misi-level-container">
-        <div class="level-container">
-            <div class="level-btn-contianer">
-                <a href="">
-                    <div class="level-btn">
-                        <h3 >Level</h3>
-                    </div>
-                </a>
 
-                <a href="">
-                    <div class="level-btn">
-                        <h3>Riwayat Penyelesaian</h3>
-                    </div>
-                </a>
-            </div>
+            $kendaraan = $this->db->query("SELECT * FROM data_kendaraan WHERE jenis_kendaraan='$jenis'")->row_object();
 
-            <!-- ALL Level -->
-            <a href="<?php echo base_url('misilevel/level') ?>">
-                <div class="level-btn-all">
-                    <h3>Level 1</h3>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
+            print_r($kendaraan);
+
+
+            $tanggal1 = new DateTime($tanggal_ambil);
+                $tanggal2 = new DateTime($tanggal_kembali);
+
+
+
+            if($paket_sewa=='Perjam'){
+                $tanggal_ambil=date('Y-m-d');
+                $jam_ambil=date('H:i');
+                $harga=$kendaraan->perjam;
+                $biaya = 0;
+            }else if($paket_sewa=='Perhari'){
+                
+
+                $selisih = $tanggal1->diff($tanggal2)->days;
+
+
+                $harga=$kendaraan->perhari;
+                $biaya = $selisih*$harga;
+
+
+            }else if($paket_sewa=='Perminggu'){
+                $harga=$kendaraan->perminggu;
+                $selisih = floor($tanggal1->diff($tanggal2)->days/7);
+                 
+                $biaya=$selisih*$harga;
+            }
+
+
+            // hitung durasi
+            $tanggaljam1 = new DateTime(substr($tanggal_ambil, 0,10).' '.$jam_ambil);
+            $tanggaljam2 = new DateTime(substr($tanggal_kembali, 0,10).' '.$jam_kembali);
+
+            $selisihjam = $tanggaljam1->diff($tanggaljam2);
+            $durasi = ($selisihjam->days * 24) + $selisihjam->h;
+
+
+             
+
+
+            echo $sql="INSERT INTO data_sewa(
+
+                kode,
+                nama_customer,
+                telepon_customer,
+                jaminan,
+                paket,
+                tanggal_ambil,
+                jam_ambil,
+                tanggal_kembali,
+                jam_kembali,
+                jenis,
+                kelengkapan,
+                nomor_helm,
+                foto_sewa,
+                durasi,
+                biaya
+
+            ) VALUES(
+
+                '$kode',
+                '$nama_customer',
+                '$telepon_customer',
+                '$jaminan',
+                '$paket_sewa',
+                '$tanggal_ambil',
+                '$jam_ambil',
+                '$tanggal_kembali',
+                '$jam_kembali',
+                '$jenis',
+                '$kelengkapan',
+                '$nomor_helm',
+                '$foto_sewa',
+                '$durasi',
+                '$biaya'
+
+
+            )";
+
+
+
+
+
+
+
+
+
+            if($this->db->query($sql)){
+                 $this->session->set_flashdata('update', ' Data berhasil di simpan');
+              redirect('outputdata'); 
+           
+            }
+    
+  }
+
+  function delete(){
+    $id = $this->uri->segment(3);
+
+    $sql="DELETE FROM data_sewa WHERE id_sewa='$id'";
+ if($this->db->query($sql)){
+                 $this->session->set_flashdata('update', ' Data berhasil di hapus');
+              redirect('outputdata'); 
+           
+            }
+    
+
+  }
+    
+
+}
