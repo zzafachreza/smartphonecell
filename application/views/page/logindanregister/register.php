@@ -224,8 +224,8 @@ function isMobile() {
             <div class="login-card">
                 <div class="header-reg">
                     <div class="btn-back">
-                        <a>
-                            <img src="assets/img/icon/arrow-back.png" alt="back" width="30px">
+                        <a href="<?= base_url('login'); ?>">
+                            <img src="assets/img/icon/arrow-back.png" alt="back" width="20px">
                         </a>
                     </div>
                     <div class="header-title-container">

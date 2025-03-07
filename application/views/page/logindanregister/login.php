@@ -286,7 +286,7 @@ function isMobile()
             </form>
 
             <div class="btn-register">
-                <a class="href-reg" href="#">
+                <a class="href-reg" href="<?= base_url('Register') ?>">
                     <p>Belum buat akun? Silakan daftar</p>
                 </a>
             </div>
