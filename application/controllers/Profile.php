@@ -64,6 +64,11 @@ class Profile extends CI_Controller
             $username = $_POST['username'];
           
             $telepon = $_POST['telepon'];
+
+        $alamat = $_POST['alamat'];
+        $kode_undangan = $_POST['kode_undangan'];
+        $bank_pengguna = $_POST['bank_pengguna'];
+        $rekening_pengguna = $_POST['rekening_pengguna'];
           
 
 
@@ -73,7 +78,10 @@ class Profile extends CI_Controller
                  $sql="UPDATE data_pengguna Set
                         nama_lengkap='$nama_lengkap',
                         username='$username',
-                       
+                        alamat='$alamat',
+                        kode_undangan='$kode_undangan',
+                        bank_pengguna='$bank_pengguna',
+                        rekening_pengguna='$rekening_pengguna',
                         telepon='$telepon',
                         password='$password' WHERE id_pengguna='$id_pengguna';";
                         
@@ -83,6 +91,10 @@ class Profile extends CI_Controller
                         $sql="UPDATE data_pengguna Set
                         nama_lengkap='$nama_lengkap',
                         username='$username',
+                        alamat='$alamat',
+kode_undangan='$kode_undangan',
+bank_pengguna='$bank_pengguna',
+rekening_pengguna='$rekening_pengguna',
                         telepon='$telepon' WHERE id_pengguna='$id_pengguna';";
             }
 

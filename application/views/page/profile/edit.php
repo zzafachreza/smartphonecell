@@ -244,6 +244,42 @@
             <input class="form-control" type="text" name="username" value="<?= $_SESSION['username']; ?>">
         </div>
 
+          <div class="form-group">
+            <label for="">Telepon</label>
+            <input class="form-control" type="text" name="telepon" value="<?= $_SESSION['telepon']; ?>">
+        </div>
+
+          <div class="form-group">
+             <label for="">Alamat</label>
+            
+            <input class="form-control" type="text" name="alamat" value="<?= $_SESSION['alamat']; ?>">
+        </div>
+<div class="form-group">
+   <label for="">Pilih bank</label>
+                            <select class="form-control" name="bank_pengguna" id="bank" required>
+                                <option value="">Pilih Bank</option>
+
+                                <?php
+                                foreach ($this->db->query("SELECT * FROM data_bank")->result() as $r) {
+                                ?>
+                                  <option <?php echo $r->nama_bank==$_SESSION['bank_pengguna']?'selected':'' ?> ><?php echo $r->nama_bank ?></option>
+
+                                <?php } ?>
+                               
+                            </select>
+                            <small class="text-danger"><?= form_error('bank'); ?></small>
+                        </div>
+
+           <div class="form-group">
+            <label for="">Nomor Rekening</label>
+            <input class="form-control" type="text" name="rekening_pengguna" value="<?= $_SESSION['rekening_pengguna']; ?>">
+        </div>
+
+           <div class="form-group">
+            <label for="">Kode Undangan</label>
+            <input class="form-control" type="text" name="kode_undangan" value="<?= $_SESSION['kode_undangan']; ?>">
+        </div>
+
 
         <div class="form-group">
             <label for="">Password</label>

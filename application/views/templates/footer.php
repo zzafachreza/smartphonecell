@@ -1,5 +1,59 @@
 </div>
 <!-- End of Content Wrapper -->
+<!-- Footer -->
+<style type="text/css">
+     .footer-dashboardku {
+        height:60px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        padding: 10px;
+        background-color: #0148A8;
+    }
+      .icon-containerku {
+        width:40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .icon {
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+       
+</style>
+
+<div class="footer-dashboardku">
+    <div class="icon-containerku">
+        <a href="<?= base_url('dashboard'); ?>">
+            <i class="fas fa-home icon"></i>
+        </a>
+    </div>
+    <div class="icon-containerku">
+        <a href="https://wa.me/6281319456595">
+           
+            <i class="fab fa-whatsapp icon"></i>
+            <!-- <img src="assets/img/icon/cs.png" 
+            alt="Customer Service"> -->
+        </a>
+    </div>
+    <div class="icon-containerku">
+        <a href="<?= base_url('profile'); ?>">
+            <i class="fas fa-user-circle icon"></i>
+        </a>
+    </div>
+</div>
 
 </div>
 <!-- End of Page Wrapper -->
@@ -36,9 +90,10 @@ print_r($this->session->flashdata('error'));
 
 ?>
 
+<script src="https://zavalabs.com/simple.money.format.js"></script>
 <script type="text/javascript">
 
-
+ $('.uang').simpleMoneyFormat();
     function hapusData(x){
         Swal.fire({
             title: "Apakah Anda yakin?",

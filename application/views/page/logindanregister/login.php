@@ -183,6 +183,7 @@
             }
 
             .btn-register {
+                margin-top: 10px;
                 font-size: 15px;
             }
 
@@ -209,7 +210,8 @@
             }
 
             .btn-block {
-                margin-top: 120px;
+                margin-top: 10px;
+                margin-bottom: :10px;
             }
         }
 
@@ -244,9 +246,9 @@ function isMobile()
 
         <center>
             <?php if (isMobile()) { ?>
-                <div style="margin-bottom: 20%;margin-top:30%">
+                <div style="margin-bottom: 40%;margin-top:0%">
                     <div>
-                        <img src="assets/img/icon/logo2.png" width="300">
+                        <img src="assets/img/icon/logo2.png" width="300" height="220">
                     </div>
                  
                 </div>
@@ -263,33 +265,30 @@ function isMobile()
             <?php } ?>
             <form class="user" method="post" action="<?= base_url('login/validasi'); ?>">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                    <input autocomplete="off" type="text" required class="form-control" id="username" name="username" placeholder="Username">
                     <small class="text-danger"><?= form_error('username'); ?></small>
                 </div>
                 <div class="form-group">
-                    <input type="password" style="width: 100%" class="form-control" id="password" name="password" placeholder="Kata Sandi">
+                    <input type="password" required style="width: 100%" class="form-control" id="password" name="password" placeholder="Kata Sandi">
                     <small class="text-danger"><?= form_error('password'); ?></small>
                 </div>
                 <div class="form-group">
-                    <input type="number" style="width: 100%" class="form-control" id="kode_undangan" name="kode_undangan" placeholder="Kode Undangan">
+                    <input autocomplete="off" required style="width: 100%" class="form-control" id="kode_undangan" name="kode_undangan" placeholder="Kode Undangan">
                     <small class="text-danger"><?= form_error('kode_undangan'); ?></small>
                 </div>
-                <div style="align-items: center; justify-content:center; ">
-                    <a href="#">
+                 <a href="#">
                         <p style="font-family: 'Poppins', sans-serif;">Lupa Kata Sandi</p>
-                    </a>
-                </div>    
-                <div class="form-group">
-                    <button class="btn btn-block" type="submit">Masuk</button>
-                </div>
-
-            </form>
-
-            <div class="btn-register">
-                <a class="href-reg" href="<?= base_url('Register') ?>">
+                    </a> 
+                <button class="btn btn-block" type="submit">Masuk</button>
+        <div class="btn-register">
+                <a class="href-reg" href="<?= base_url('register') ?>">
                     <p>Belum buat akun? Silakan daftar</p>
                 </a>
             </div>
+
+            </form>
+
+           
 
          
 

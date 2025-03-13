@@ -29,68 +29,39 @@ class login extends CI_Controller
         }
     }
     
-private function _login()
-{
-    // Ambil inputan username dan password
-    $username = htmlspecialchars(trim($this->input->post('username')));
-    $password = $this->input->post('password');
-
-    // Cari user berdasarkan username, pastikan username tanpa spasi dan trim whitespace
-    $user = $this->db->get_where('user', ['username' => $username])->row_array();
-
-    // Jika user ditemukan
-    if ($user) {
-        // Verifikasi password
-        if (password_verify($password, $user['password'])) {
-            // Jika password cocok, set session
-            $data = [
-                'user_id' => $user['id'],  // Ganti 'id' dengan 'user_id' untuk konsistensi di seluruh aplikasi
-                'namalengkap' => $user['namalengkap'],
-                'username' => $user['username']
-            ];
-            $this->session->set_userdata($data);
-
-            // Redirect ke dashboard atau halaman lainnya
-            redirect('dashboard');
-        } else {
-            // Jika password salah, tampilkan pesan error
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Password salah!
-            </div>');
-            redirect('login');
-        }
-    } else {
-        // Jika username tidak ditemukan, tampilkan pesan error
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-        Username tidak terdaftar!
-        </div>');
-        redirect('login');
-    }
-}
 
 
    public function validasi()
-{
-    // Ambil inputan username dan password
-    $username = $this->input->post('username');
-    $password = sha1($this->input->post('password'));
+    {
+        // Ambil inputan username dan password
+        $username = $this->input->post('username');
+        $password = sha1($this->input->post('password'));
+        $kode_undangan = $_POST['kode_undangan'];
 
-    // Cari user berdasarkan username
-    $sql = "SELECT * FROM data_pengguna WHERE username = ? AND password = ?";
-    $query = $this->db->query($sql, [$username,$password]);
-    $user = $query->row_array();
+        $cek="SELECT * FROM data_undangan WHERE kode_undangan='$kode_undangan'";
 
-    // Jika user ditemukan
-    if ($user) {
-    $_SESSION = $user;
-        redirect('dashboard');
-        
-    } else {
-        // Jika username tidak ditemukan
-        $this->session->set_flashdata('error', 'Username atau password salah !');
-        redirect('login');
+        if($this->db->query($cek)->num_rows()==0){
+             // Jika username tidak ditemukan
+            $this->session->set_flashdata('error', 'Kode Undangan tidak terdaftar !');
+            redirect('login');
+        }
+
+        // Cari user berdasarkan username
+        $sql = "SELECT * FROM data_pengguna WHERE username = ? AND password = ?";
+        $query = $this->db->query($sql, [$username,$password]);
+        $user = $query->row_array();
+
+        // Jika user ditemukan
+        if ($user) {
+        $_SESSION = $user;
+            redirect('dashboard');
+            
+        } else {
+            // Jika username tidak ditemukan
+            $this->session->set_flashdata('error', 'Username atau password salah !');
+            redirect('login');
+        }
     }
-}
 
 
     public function logout()

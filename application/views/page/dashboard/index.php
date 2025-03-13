@@ -41,12 +41,12 @@
         gap: 20px; /* Jarak antara elemen */
     }
     .wallet-container img {
-        width: 25px; /* Sesuaikan ukuran gambar wallet */
+        width: 15px; /* Sesuaikan ukuran gambar wallet */
         height: auto;
     }
 
     .left-wallet img {
-        width: 15px; /* Ukuran lebih kecil untuk left arrow */
+        width: 8px; /* Ukuran lebih kecil untuk left arrow */
         height: auto;
     }
 
@@ -81,10 +81,10 @@
     }
 
     .menu-container {
+        width: 30%;
         box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
         color: black;
         border-radius: 10px;
-        display: flex;
         justify-content: flex-start; /* Posisikan konten ke kiri */
         align-items: center;
         height: 100px; /* Sesuaikan tinggi */
@@ -114,12 +114,14 @@
     }
 
     .lihatproduk div {
-        width: 100%; /* Garis memanjang dari kiri ke kanan */
+        margin-left: 0px;
+        width: 50%; /* Garis memanjang dari kiri ke kanan */
         height: 1px; /* Ketebalan garis */
         background-color: black; /* Warna garis */
     }
     .footer-dashboard {
         position: fixed;
+        height: 60px;
         bottom: 0;
         left: 0;
         right: 0;
@@ -137,24 +139,11 @@
         box-sizing: border-box;
     }
 
-    .icon-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex: 1;
-    }
    
-
-        .icon {
-        color: white;
-        font-size: 25px; /* Sesuaikan ukuran icon */
-        cursor: pointer;
-    }
-
 
     .search-container {
         padding: 10px;
-        margin: 10px 0;
+        margin: 20px 0;
     }
 
     .search-input {
@@ -288,7 +277,7 @@
             color: #6EB2B0;
         }
 
-       
+    /*   
         .footer-dashboard {
         position: fixed;
         bottom: 0;
@@ -307,28 +296,17 @@
         z-index: 1000;
         box-sizing: border-box;
     }
+*/
 
-
-        .icon-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-        }
-
-        .icon {
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-        }
+      
 
         .lihatproduk-container {
-            padding: 10px;
+            padding: 20px;
             /* Hapus display: flex; */
             display: block; /* Gunakan block agar elemen tidak sejajar horizontal */
         }
 
-        .lihatproduk {
+    .lihatproduk {
     display: flex;
     align-items: center; /* Agar elemen sejajar vertikal */
     justify-content: flex-end; /* Posisikan elemen ke kanan */
@@ -336,7 +314,7 @@
 }
 
 .lihatproduk div {
-    width: 100%; /* Garis memanjang dari kiri ke kanan */
+    width: 50%; /* Garis memanjang dari kiri ke kanan */
     height: 1px; /* Ketebalan garis */
     background-color: black; /* Warna garis */
 }
@@ -383,94 +361,223 @@
             height: 31px;
         }
     }
+
+
+  
+        .search-inputku {
+
+        width: 100%; /* Lebar penuh */
+        padding: 10px 15px; /* Padding untuk input */
+        border-width: 0px;
+        height: 50px;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        border-radius: 20px; /* Border radius */
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px; /* Ukuran font */
+        outline: none; /* Hilangkan outline saat focus */
+    }
+
+    .search-inputku::placeholder {
+        color: #999; /* Warna placeholder */
+    }
+
+     .search-containerku {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom:10px;
+        margin-top: 10px;
+    }
+
+
+      .menu-containerku {
+        width: 32%;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+        color: black;
+        border-radius: 10px;
+        justify-content: flex-start; /* Posisikan konten ke kiri */
+        align-items: center;
+        height: 120px; /* Sesuaikan tinggi */
+        margin-top: 15px; /* Sesuaikan margin */
+        padding: 15px; /* Sesuaikan padding */
+        gap: 15px; /* Jarak antara icon dan teks */
+    }
+
+    .img-menuku{
+        width: 80px;
+        
+        height: 60px;
+    }
+
+    .judul-menuku{
+        margin-top: 10px;
+        font-size: 12px;
+        text-align:center;
+    }
+
+      .produk-list{
+        width: 48%;height: 250px;
+        border-radius: 8px;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        margin: 1%;
+    }
+
+
+      .produk-list img{
+        width: 100%;
+        height:160px;
+    }
+
+    .produk-title{
+       font-size: 12px;
+       line-height: 20px;
+       height: 35px;
+       color: #0148A8;
+    }
+     .produk-price{
+       font-size: 14px;
+       line-height: 10px;
+       font-weight: bold;
+    }
 </style>
 <div class="container">
+    <!-- Header -->
     <div class="home-header">
         <div class="header-name">
-            <h3 style="font-family: 'Poppins', sans-serif; color:white;">Hi, Fadhlan Himawan</h3>
+            <h3 style="font-family: 'Poppins', sans-serif; color: white;font-size: 14px;">Hi, <?= $_SESSION['nama_lengkap'] ?></h3>
         </div>
 
-        <div class="wallet-container">
+        <div class="wallet-container" onclick="window.location.href='saldo'">
             <img src="assets/img/icon/dompet.png" alt="Wallet">
-            <h3 style="color: white; font-family:'Poppins', sans-serif; font-size : 18px;">Rp 0</h3>
-            <a href="<?= base_url('Saldo')?>" class="left-wallet">
-                <img src="assets/img/icon/Vector.png" aria-label="left-arrow">
+            <h3 style="color: white; font-family: 'Poppins', sans-serif; font-size: 14px;">Rp <?php echo number_format(saldoSaya())?></h3>
+            <a href="<?= base_url('Saldo') ?>" class="left-wallet">
+                <img src="assets/img/icon/Vector.png" height="30" aria-label="left-arrow">
             </a>
         </div>
     </div>
 
-    <!-- PRODUK SMARTPHONE DI TAMPILKAN -->
-    <div class="search-container">
-        <input type="text" placeholder="Cari smartphone..." class="search-input">
+    <!-- Pencarian Smartphone -->
+    <div class="search-containerku">
+        <input type="text" id="pencarian" placeholder="Cari smartphone..." class="search-inputku">
     </div>
-    <div class="smartphone-container">
-        <h3>Belum ada list smartphone....</h3>
+
+    <!-- Daftar Smartphone -->
+    <div style="padding-left: 25px;padding-right: 25px;">
+        <div class="row" id="dataProduk">
+          
+   
+            
+        </div>
     </div>
-    
+
+    <!-- Produk & Menu -->
     <div class="main-container">
         <div class="lihatproduk-container">
-            <div class="lihatproduk">
-                <div></div> <!-- Garis horizontal -->
-                <p style="font-family: 'Poppins', sans-serif; font-size: 14px; margin: 0; padding: 0;">Lihat Semua Produk</p>
-                <a href="<?= base_url('Produk'); ?>">
+            <div class="lihatproduk" onclick="window.location.href='<?= base_url('produk'); ?>'">
+                <div></div>
+                 <!-- Garis horizontal -->
+                <p style="font-family: 'Poppins', sans-serif; font-size: 12px; margin: 0; padding: 0;">
+                    Lihat Semua Produk
+                </p>
+               
                     <img src="assets/img/icon/right-arrow.png" alt="icon_lihat_produk" height="20">
-                </a>
+              
             </div>
-            <div class="menu">
-                <div>
-                    <a style="text-decoration:none; color:black;" href="<?= base_url('giftcard'); ?>">
-                        <div class="menu-container">
-                            <div>
-                                <img class="img-menu" src="assets/img/icon/giftcard.png">
-                            </div>
-                            <p class="judul-menu">Gift Card</p>
-                        </div> 
-                    </a>
+
+            <!-- Menu -->
+            <div class="row">
+              
+                    
+                        <div onclick="window.location.href='<?= base_url('giftcard'); ?>'" class="menu-containerku">
+                            <img class="img-menuku" src="assets/img/icon/giftcard.png" alt="Gift Card">
+                            <p class="judul-menuku">Gift Card</p>
+                        </div>
+                    
+
+                    
+                        <div onclick="window.location.href='<?= base_url('misilevel'); ?>'" class="menu-containerku">
+                            <img class="img-menuku" src="assets/img/icon/misilevel.png" alt="Misi Level">
+                            <p class="judul-menuku">Misi Level</p>
+                        </div>
+                    
+
+                   
+                        <div onclick="window.location.href='<?= base_url('tentang'); ?>'" class="menu-containerku">
+                            <img class="img-menuku" src="assets/img/icon/logo2.png" alt="Tentang Kami">
+                            <p class="judul-menuku">Tentang Kami</p>
+                        </div>
+                  
                 
-                    <a style="text-decoration:none; color:black;" href="<?= base_url('Misilevel') ?>">
-                        <div class="menu-container">
-                            <div>
-                                <img class="img-menu" src="assets/img/icon/misilevel.png">
-                            </div>
-                            <p class="judul-menu">Misi Level</p>
-                        </div>
-                    </a>
-
-                    <a style="text-decoration:none; color:black;" href="<?= base_url('Tentang') ?>">
-                        <div class="menu-container">
-                            <div>
-                                <img class="img-menu" src="assets/img/icon/logo2.png">
-                            </div>
-                            <p class="judul-menu">Tentang Kami</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-     
-
-        <div class="footer-dashboard">
-            <div class="icon-container">
-                <i class="fas fa-home icon"></i>
-            </div>
-            <div class="icon-container">
-                <a href="https://wa.me/6281319456595">
-                    <img class="icon-footer" src="assets/img/icon/cs.png" alt="icon-cs">
-                </a>
-            </div>
-            <div class="icon-container">
-                <a href="<?= base_url('profile'); ?>"> <i class="fas fa-user-circle icon"></i></a>
             </div>
         </div>
     </div>
 </div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // JavaScript untuk membuat slider otomatis
-    var myCarousel = document.querySelector('#carouselExample');
-    var carousel = new bootstrap.Carousel(myCarousel, {
-        interval: 3000, // Set waktu pergeseran otomatis (3000ms = 3 detik)
-        wrap: true, // Membuat slider kembali ke awal setelah gambar terakhir
-        pause: 'hover' // Pause otomatis ketika mouse mengarah ke slider
+
+
+ $(document).ready(function () {
+    getDataProduk();
+    let timer; // Variabel untuk debounce
+
+    $("#pencarian").on("input", function () {
+        clearTimeout(timer); // Hapus timer sebelumnya
+        let key = $(this).val().trim(); // Hilangkan spasi berlebih
+
+        timer = setTimeout(function () {
+            getDataProduk(key);
+        }, 300); // Debounce 300ms untuk mengurangi request berlebihan
     });
+});
+
+function getDataProduk(key = '') {
+    $.ajax({
+        url: '<?php echo site_url("api/dashboard"); ?>',
+        type: 'GET',
+        data: { search: key }, // Kirim parameter pencarian ke backend
+        dataType: 'json',
+        success: function (response) {
+            let produkContainer = $("#dataProduk");
+            produkContainer.empty(); // Bersihkan kontainer sebelum menambahkan data baru
+
+            if (!response.status || response.data.length === 0) {
+                produkContainer.html('<p class="no-data">Tidak ada produk tersedia.</p>');
+                return;
+            }
+
+            let produkHTML = response.data.map(i => `
+                <div class="produk-list" onClick="window.location.href='<?php echo site_url('produk/detail/')?>${i.id_produk}'">
+                    <img src="<?php echo urladmin(); ?>${i.gambar}" alt="${i.nama_produk}" class="produk-image" />
+                    <p class="produk-title">${i.nama_produk}</p>
+                    <p class="produk-price">Rp ${formatRupiah(i.harga)}</p>
+                </div>
+            `).join('');
+
+            produkContainer.html(produkHTML);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", status, error);
+            $("#dataProduk").html('<p class="error-msg">Gagal mengambil data produk.</p>');
+        }
+    });
+}
+
+// Fungsi untuk format harga menjadi Rupiah
+function formatRupiah(angka) {
+    return new Intl.NumberFormat().format(angka);
+}
+
+
+
+
+
+    // JavaScript untuk membuat slider otomatis
+    // var myCarousel = document.querySelector('#carouselExample');
+    // var carousel = new bootstrap.Carousel(myCarousel, {
+    //     interval: 3000, // Set waktu pergeseran otomatis (3000ms = 3 detik)
+    //     wrap: true, // Membuat slider kembali ke awal setelah gambar terakhir
+    //     pause: 'hover' // Pause otomatis ketika mouse mengarah ke slider
+    // });
 </script>

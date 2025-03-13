@@ -26,7 +26,7 @@
 
     .header-title {
         color: white;
-        font-size: 25px;
+        font-size: 16px;
         flex-grow: 1; /* Allow title to take available space */
         text-align: center; /* Center title */
     }
@@ -89,9 +89,10 @@
     }
 
     .card-level-contianer {
+        
         padding: 10px;
         border-radius: 20px;
-        border: 2px solid black;
+/*        border: 2px solid black;*/
         width: 100%;
     }
 
@@ -134,7 +135,7 @@
 }
 
 .list-smartphone {
-    font-size: 14px;
+    font-size: 10px;
     margin-bottom: 5px; /* Jarak antara item list */
     color: #333; /* Warna teks list */
 }   
@@ -168,7 +169,7 @@
 
     @media (max-width: 480px) {
         .header-title {
-            font-size: 18px; /* Further reduce font size for very small screens */
+            font-size: 16px; /* Further reduce font size for very small screens */
             text-align: center; /* Center title */
         }
 
@@ -178,7 +179,7 @@
         }
 
         .list-smartphone-container h3 {
-            font-size: 12px; /* Further reduce font size for list items */
+            font-size: 11px; /* Further reduce font size for list items */
         }
 
         nav {
@@ -219,10 +220,10 @@
 }
 .poster-misi {
     width: 100%; /* Lebar penuh */
-    max-width: 150px; /* Batasi lebar maksimum */
+    max-width: 100px; /* Batasi lebar maksimum */
     height: auto; /* Tinggi disesuaikan secara proporsional */
     border-radius: 10px; /* Border radius untuk gambar */
-    flex-shrink: 0; /* Pastikan gambar tidak menyusut */
+    
 }
 
 .deks-misi {
@@ -233,8 +234,9 @@
 </style>
 <header>
     <nav>
-        <a class="header-btn-back" href="<?= base_url('Dashboard') ?>">
-            <img class="arrow-left" src="../assets/img/icon/left-arrow.png" alt="arrow-back">
+        <a class="header-btn-back" href="<?= base_url('misilevel') ?>">
+            <img class="arrow-left" src="<?php echo site_url('assets/img/icon/left-arrow.png') ?>" alt="arrow-back">
+            
         </a>
         <h3 class="header-title">Misi Level</h3>
         <div style="padding: 10px;"></div>
@@ -243,29 +245,44 @@
 
 <div class="container">
     <!-- Card Misi -->
-    <div class="card-level-contianer">
+    <?php
+
+    $level = $this->uri->segment(3);
+    $sql="SELECT * FROM data_paket WHERE level='$level'";
+
+    foreach ($this->db->query($sql)->result() as $r) {
+        ?>
+
+        <div class="card-level-contianer">
         <div class="card">
             <!-- Gambar Poster -->
        <div>
-       <img src="../assets/img/icon/dummy_level.png" class="poster-misi" alt="poster-misi">
+       <img src="<?php echo urladmin().$r->gambar_paket ?>" class="poster-misi" alt="poster-misi">
        </div>
             
             <!-- Deskripsi Misi -->
             <div class="deks-misi">
-                <h3 class="misi-title">Paket Bundling 1</h3>
+                <h3 class="misi-title"><?php echo $r->nama_paket ?></h3>
                 <ul class="list-smatrphone-misi">
-                    <li class="list-smartphone">Samsung Galaxy A23</li>
-                    <li class="list-smartphone">Xiaomi 14T</li>
-                    <li class="list-smartphone">Vivo T45</li>
-                    <li class="list-smartphone">Oppo 234</li>
-                    <li class="list-smartphone">Xiaomi 9</li>
+
+                    <?php
+                    $ID_PRODUK  = $r->produk;
+                    foreach($this->db->query("SELECT * FROM data_produk WHERE id_produk IN($ID_PRODUK)")->result() as $p){
+                    ?>
+
+                    <li class="list-smartphone"><?php echo $p->nama_produk ?></li>
+                    <?php   
+                            }
+
+                        ?>
+                  
                 </ul>
 
                 <!-- HARGa -->
-                 <h3 class="harga-bundle">Rp8.999.000</h3>
+                 <h3 class="harga-bundle">Rp<?php echo number_format($r->harga_paket) ?></h3>
 
                  
-        <a href="<?= base_url('Misilevel/bundling');  ?>" class="btn-buy">
+        <a href="<?= base_url('misilevel/bundling/'.$r->id_paket);  ?>" class="btn-buy">
             <div class="teks-btn-buy">Beli Sekarang</div>
         </a>
             </div>
@@ -273,4 +290,9 @@
 
 
     </div>
+
+    <?php  } ?>
+
+
+
 </div>

@@ -28,7 +28,7 @@
 
         .header-title {
             color: white;
-            font-size: 25px;
+            font-size: 16px;
             flex-grow: 1; /* Allow title to take available space */
             text-align: center; /* Center title */
         }
@@ -287,7 +287,7 @@
             <h3>Saldomu</h3>
             <div class="saldo-info">
                 <img src="../assets/img/icon/dompet.png" alt="wallet">
-                <p>Rp.0</p>
+                <p>Rp.<?php echo number_format(saldoSaya()) ?></p>
             </div>
         </div>
 
@@ -300,10 +300,13 @@
 
         <!-- Konten Isi Saldo -->
         <div id="isi-saldo" class="content active">
-            <div class="tanggal-container">
-                <p>26 Februari 2025</p>
-                <div class="garis-panjang"></div>
-            </div>
+      
+            
+            <?php
+
+            foreach ($this->db->query("SELECT * FROM data_saldo WHERE tipe='Topup' AND fid_pengguna='$_SESSION[id_pengguna]'")->result() as $rs) {
+            ?>
+
             <div class="riwayat-item">
                 <div class="left">
                     <div class="icon">
@@ -311,22 +314,39 @@
                     </div>
                     <div class="info">
                         <h4>Isi Saldo</h4>
-                        <p>26 Feb 2024</p>
+                        <p><?php echo Indonesia3Tgl($rs->tanggal) ?></p>
                     </div>
                 </div>
                 <div class="right">
-                    <h4>+Rp1000.00</h4>
-                    <p>Proses</p>
-                </div>
+                    <h4>+Rp<?php echo number_format($rs->nominal) ?></h4>
+                    <?php 
+                        $warna = 'yellow'; // Default warna
+
+                        if ($rs->status == 'Berhasil') {
+                            $warna = 'green';
+                        } elseif ($rs->status == 'Gagal') {
+                            $warna = 'red';
+                        }
+                    ?>
+
+                    <p style="color: <?php echo $warna; ?>;"><?php echo htmlspecialchars($rs->status); ?></p>                </div>
             </div>
+
+            <?php } ?>
+
+
+
+
         </div>
 
         <!-- Konten Tarik Saldo -->
         <div id="tarik-saldo" class="content">
-            <div class="tanggal-container">
-                <p>27 Februari 2025</p>
-                <div class="garis-panjang"></div>
-            </div>
+         
+            <?php
+
+            foreach ($this->db->query("SELECT * FROM data_saldo WHERE tipe='Tarik' AND fid_pengguna='$_SESSION[id_pengguna]'")->result() as $rs) {
+            ?>
+
             <div class="riwayat-item">
                 <div class="left">
                     <div class="icon2">
@@ -334,22 +354,34 @@
                     </div>
                     <div class="info">
                         <h4>Tarik Saldo</h4>
-                        <p>27 Feb 2024</p>
+                        <p><?php echo Indonesia3Tgl($rs->tanggal) ?></p>
                     </div>
                 </div>
                 <div class="right">
-                    <h4>-Rp500.00</h4>
-                    <p>Selesai</p>
-                </div>
+                    <h4>+Rp<?php echo number_format($rs->nominal) ?></h4>
+                    <?php 
+                        $warna = 'yellow'; // Default warna
+
+                        if ($rs->status == 'Berhasil') {
+                            $warna = 'green';
+                        } elseif ($rs->status == 'Gagal') {
+                            $warna = 'red';
+                        }
+                    ?>
+
+                    <p style="color: <?php echo $warna; ?>;"><?php echo htmlspecialchars($rs->status); ?></p>                </div>
             </div>
+
+            <?php } ?>
         </div>
 
         <!-- Konten Refund -->
         <div id="refund" class="content">
-            <div class="tanggal-container">
-                <p>28 Februari 2025</p>
-                <div class="garis-panjang"></div>
-            </div>
+                 <?php
+
+            foreach ($this->db->query("SELECT * FROM data_saldo WHERE tipe='Refund' AND fid_pengguna='$_SESSION[id_pengguna]'")->result() as $rs) {
+            ?>
+
             <div class="riwayat-item">
                 <div class="left">
                     <div class="icon3">
@@ -357,14 +389,25 @@
                     </div>
                     <div class="info">
                         <h4>Refund</h4>
-                        <p>28 Feb 2024</p>
+                        <p><?php echo Indonesia3Tgl($rs->tanggal) ?></p>
                     </div>
                 </div>
                 <div class="right">
-                    <h4>+Rp200.00</h4>
-                    <p>Proses</p>
-                </div>
+                    <h4>+Rp<?php echo number_format($rs->nominal) ?></h4>
+                    <?php 
+                        $warna = 'yellow'; // Default warna
+
+                        if ($rs->status == 'Berhasil') {
+                            $warna = 'green';
+                        } elseif ($rs->status == 'Gagal') {
+                            $warna = 'red';
+                        }
+                    ?>
+
+                    <p style="color: <?php echo $warna; ?>;"><?php echo htmlspecialchars($rs->status); ?></p>                </div>
             </div>
+
+            <?php } ?>
         </div>
     </div>
 

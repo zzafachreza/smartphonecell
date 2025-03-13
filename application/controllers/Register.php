@@ -77,22 +77,28 @@ class Register extends CI_Controller
 
 
         $nama_lengkap = $_POST['nama_lengkap'];
-        $tempat_lahir = $_POST['tempat_lahir'];
-        $tanggal_lahir = $_POST['tanggal_lahir'];
-        $jenis_kelamin = $_POST['jenis_kelamin'];
-        $operasi = $_POST['operasi'];
-        $waktu_operasi = $_POST['waktu_operasi'];
+        $username = $_POST['username'];
         $telepon = $_POST['telepon'];
+        $alamat = $_POST['alamat'];
+     
         $password = sha1($_POST['password']);
+        $kode_undangan = $_POST['kode_undangan'];
+        $bank_pengguna = $_POST['bank_pengguna'];
+        $rekening_pengguna = $_POST['rekening_pengguna'];
 
 
         // cek
 
-        $cek = $this->db->query("SELECT * FROM data_pengguna WHERE telepon='$telepon'")->num_rows();
+        $cek = $this->db->query("SELECT * FROM data_pengguna WHERE username='$username'")->num_rows();
+        $cek2 = $this->db->query("SELECT * FROM data_undangan WHERE kode_undangan='$kode_undangan'")->num_rows();
 
         if($cek > 0){
             // Set pesan sukses dan redirect ke halaman login
-        $this->session->set_flashdata('error', 'Nomor telepon sudah terdaftar !');
+        $this->session->set_flashdata('error', 'Username sudah terdaftar !');
+            redirect('register');
+        }elseif($cek2==0){
+            // Set pesan sukses dan redirect ke halaman login
+        $this->session->set_flashdata('error', 'Kode undngan tidak terdaftar !');
             redirect('register');
         }else{
 
@@ -100,25 +106,25 @@ class Register extends CI_Controller
           echo  $sql="INSERT INTO data_pengguna(
 
             nama_lengkap,
-            tempat_lahir,
-            tanggal_lahir,
-            jenis_kelamin,
-            operasi,
-            waktu_operasi,
+            username,
             telepon,
-            password
+            alamat,
+            password,
+            kode_undangan,
+            bank_pengguna,
+            rekening_pengguna
 
 
             ) VALUES(
 
             '$nama_lengkap',
-            '$tempat_lahir',
-            '$tanggal_lahir',
-            '$jenis_kelamin',
-            '$operasi',
-            '$waktu_operasi',
+            '$username',
             '$telepon',
-            '$password'
+            '$alamat',
+            '$password',
+            '$kode_undangan',
+             '$bank_pengguna',
+             '$rekening_pengguna'
             );
 
 

@@ -28,7 +28,7 @@ class Produk extends CI_Controller
     $this->load->view('templates/footer');
 }
 
-    public function add()
+    public function detail()
     {
         $data['title'] = 'Input Costumer';
         $data['data_pengguna'] = $this->db->get_where('data_pengguna', ['username' =>
@@ -37,7 +37,7 @@ class Produk extends CI_Controller
 
         $this->load->view('templates/header', $data);
         // $this->load->view('topbar', $data);
-        $this->load->view('page/outputdata/add', $data);
+        $this->load->view('page/produk/detail', $data);
         $this->load->view('templates/footer');
     }
 

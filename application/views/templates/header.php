@@ -42,9 +42,46 @@
 <?php
 
  date_default_timezone_set('Asia/Jakarta');
-function urladmin(){
-    return 'http://localhost/adminrentorbarokah/';
+
+function Indonesia3Tgl($tgl) {
+    $bulan = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 
+        'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
+    ];
+
+    $tanggal = date('d', strtotime($tgl)); // Ambil tanggal (26)
+    $bulanIndex = date('n', strtotime($tgl)) - 1; // Ambil bulan (1-12), dikurangi 1 untuk array
+    $tahun = date('Y', strtotime($tgl)); // Ambil tahun (2025)
+
+    return $tanggal . ' ' . $bulan[$bulanIndex] . ' ' . $tahun;
 }
+
+
+function urladmin(){
+    return 'http://localhost/adminspcell/';
+}
+
+ function saldoSaya(){
+
+      $ci = get_instance(); // Ambil instance CodeIgniter
+    $ci->load->database(); // Pastikan database sudah dimuat
+         
+         $usr = $ci->db->query("SELECT 
+            a.id_pengguna,
+            (
+                COALESCE((SELECT SUM(nominal) FROM data_saldo WHERE status='Berhasil' AND tipe = 'Topup' AND fid_pengguna = a.id_pengguna), 0) -
+                COALESCE((SELECT SUM(nominal) FROM data_saldo WHERE status='Berhasil' AND tipe = 'Tarik' AND fid_pengguna = a.id_pengguna), 0) -
+                COALESCE((SELECT SUM(nominal) FROM data_saldo WHERE status='Berhasil' AND tipe = 'Beli' AND fid_pengguna = a.id_pengguna), 0)+
+                COALESCE((SELECT SUM(nominal) FROM data_saldo WHERE status='Berhasil' AND tipe = 'Komisi' AND fid_pengguna = a.id_pengguna), 0) +
+                COALESCE((SELECT SUM(nominal) FROM data_saldo WHERE status='Berhasil' AND tipe = 'Refund' AND fid_pengguna = a.id_pengguna), 0)
+            ) AS saldo
+        FROM data_pengguna a WHERE a.id_pengguna='".$_SESSION['id_pengguna']."'")->row_object();
+
+         return $usr->saldo;
+
+
+    }
+
 
 
 ?>

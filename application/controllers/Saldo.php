@@ -128,7 +128,7 @@ class Saldo extends CI_Controller
     }
 
 
-     public function uploadFoto($name_data,$ref_user){
+public function uploadFoto($name_data,$ref_user){
 
     error_reporting(0);
          $target_dir = "datafoto/";
@@ -435,6 +435,102 @@ class Saldo extends CI_Controller
            
             }
     
+  }
+
+
+  function topup(){
+
+    $fid_pengguna = $_POST['fid_pengguna'];
+    $tipe = $_POST['tipe'];
+    $nominal = str_replace(",", "", $_POST['nominal']);
+    $catatan = $_POST['catatan'];
+    $bukti_transaksi = $this->uploadFoto('bukti_transaksi',date('ymdhis'));
+    $sql="INSERT INTO data_saldo(fid_pengguna,tipe,nominal,catatan,bukti_transaksi) VALUES('$fid_pengguna','$tipe','$nominal','$catatan','$bukti_transaksi')";
+
+     if($this->db->query($sql)){
+                 $this->session->set_flashdata('update', ' Data berhasil disimpan ');
+              redirect('saldo'); 
+           
+            }
+
+  }
+
+
+    function tarik(){
+
+    $fid_pengguna = $_POST['fid_pengguna'];
+    $tipe = $_POST['tipe'];
+    $nominal = str_replace(",", "", $_POST['nominal']);
+    $catatan = $_POST['catatan'];
+    // $bukti_transaksi = $this->uploadFoto('bukti_transaksi',date('ymdhis'));
+    $sql="INSERT INTO data_saldo(fid_pengguna,tipe,nominal,catatan) VALUES('$fid_pengguna','$tipe','$nominal','$catatan')";
+
+     if($this->db->query($sql)){
+                 $this->session->set_flashdata('update', ' Data berhasil disimpan ');
+              redirect('saldo'); 
+           
+            }
+
+  }
+
+
+
+    function beli(){
+
+        print_r($_POST);
+
+    $fid_pengguna = $_POST['fid_pengguna'];
+    $fid_paket = $_POST['fid_paket'];
+    $total = $_POST['total'];
+    $tipe = 'Beli';
+    $total = str_replace(",", "", $_POST['total']);
+    $catatan = 'Pembelian Paket Bundling';
+    $komisi = $_POST['komisi'];
+    
+ 
+    $sql1="INSERT INTO data_saldo(fid_pengguna,tipe,nominal,catatan,status) VALUES('$fid_pengguna','$tipe','$total','$catatan','Berhasil')";
+    $sqlKomisi="INSERT INTO data_saldo(fid_pengguna,tipe,nominal,catatan,status) VALUES('$fid_pengguna','Komisi','$komisi','$catatan','Berhasil')";
+    $sql2="INSERT INTO data_beli(fid_pengguna,fid_paket,total) VALUES('$fid_pengguna','$fid_paket','$total')";
+
+    
+
+     if($this->db->query($sql1) && $this->db->query($sql2) && $this->db->query($sqlKomisi)){
+                 $this->session->set_flashdata('update', ' Data berhasil disimpan ');
+              redirect('misilevel'); 
+           
+            }
+
+  }
+
+
+  function refund(){
+    $total = $this->uri->segment(3);
+    $id_beli = $this->uri->segment(4);
+    $fid_pengguna = $_SESSION['id_pengguna'];
+    $sql1="UPDATE data_beli SET status_beli='Refund' WHERE id_beli='$id_beli'";
+       $sql2="INSERT INTO data_saldo(fid_pengguna,tipe,nominal,catatan,status) VALUES('$fid_pengguna','Refund','$total','Refund Paket Bundling','Berhasil')";
+
+            if($this->db->query($sql1) && $this->db->query($sql2)){
+                 $this->session->set_flashdata('update', ' Data berhasil disimpan ');
+              redirect('misilevel'); 
+           
+            }
+
+  }
+
+
+    function claim(){
+
+    $fid_voucher = $this->uri->segment(3);
+    $fid_pengguna = $_SESSION['id_pengguna'];
+    $sql="INSERT INTO data_claim(fid_pengguna,fid_voucher) VALUES('$fid_pengguna','$fid_voucher')";
+      
+            if($this->db->query($sql)){
+                 $this->session->set_flashdata('update', ' Data berhasil disimpan ');
+              redirect('giftcard'); 
+           
+            }
+
   }
 
   function delete(){

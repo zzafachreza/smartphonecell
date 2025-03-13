@@ -1,16 +1,13 @@
 <style>
-    * {
+       * {
         margin: 0;
         padding: 0;
         font-family: 'Poppins', sans-serif;
         color: black;
-        box-sizing: border-box; /* Pastikan padding dan border tidak memengaruhi lebar */
     }
 
     .container {
         padding: 10px;
-        width: 100%;
-        height: 100%;
     }
 
     header {
@@ -28,7 +25,7 @@
 
     .header-title {
         color: white;
-        font-size: 25px;
+        font-size: 16px;
         flex-grow: 1; /* Allow title to take available space */
         text-align: center; /* Center title */
     }
@@ -37,85 +34,49 @@
         width: 20px;
         height: 30px;
     }
-
-    .btn-container {
+  .btn-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%; /* Lebar penuh */
-        max-width: 500px; /* Lebar maksimum untuk desktop */
-        padding: 15px; /* Padding agar tombol tidak gepeng */
+        width: 100%;
+        max-width: 500px; /* Batasi lebar untuk tampilan besar */
+        padding: 15px;
         background-color: #0148A8;
         color: white;
-        font-family: 'Poppins', sans-serif;
-        font-size: 16px;
         border-radius: 50px;
         text-align: center;
-        text-decoration: none; /* Hilangkan underline pada <a> */
-        margin: 20px auto; /* Tengah tombol secara horizontal */
+        text-decoration: none; /* Hilangkan underline */
+        margin: 10px auto; /* Tengah tombol */
     }
 
-
-    .btn-container h3 {
-        margin: 0; /* Hilangkan margin default dari <h3> */
+    .btn-container h3{
         font-size: 18px;
-        text-align: center;
         color: white;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 500;
     }
 
-.sponsor-container {
-    padding: 10px;
-    text-align: center;
-    margin-top: 20px;
-    align-items: center;
-    align-self: center;
+       .produk-list{
 
-}
+        width: 30%;height: 60px;
+        border-radius: 8px;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        margin-left: 1.5%;
+        margin-right: 1.5%;
+        margin-bottom: 15px;
+        display: flex;
+   
 
-.sponsor-img {
-    width: 371px;
-    height: 499px;
-}
-
-    
-
-    @media (max-width: 480px) {
-        .header-title {
-            font-size: 18px; /* Further reduce font size for very small screens */
-            text-align: center; /* Center title */
-        }
-
-        .search-input {
-            font-size: 10px; /* Further reduce font size for input */
-            padding: 6px 10px; /* Further adjust padding */
-        }
-
-        .list-smartphone-container h3 {
-            font-size: 12px; /* Further reduce font size for list items */
-        }
-
-        nav {
-            flex-direction: flex; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-            padding: 5px; /* Reduce padding for nav */
-        }
-
-        .header-btn-back {
-            margin-bottom: 5px; /* Add space below the back button */
-        }
-
-        .arrow-left {
-            width: 16px; /* Adjust arrow size for small screens */
-            height: 24px; /* Adjust arrow size for small screens */
-        }
     }
+
+    .produk-list img{
+        width: 100%;
+        height:auto;
+    }
+
 </style>
 
 <header>
     <nav>
-        <a class="header-btn-back" href="<?= base_url('Dashboard') ?>">
+        <a class="header-btn-back" href="<?= base_url('dashboard') ?>">
             <img class="arrow-left" src="assets/img/icon/left-arrow.png" alt="arrow-back">
         </a>
         <h3 class="header-title">Tentang Kami</h3>
@@ -124,29 +85,29 @@
 </header>
 
 <div class="container">
+    <a href="<?= base_url('tentang/visimisi') ?>" class="btn-container">
+        <h3>Visi & Misi</h3>
+    </a>
+    <a href="<?= base_url('tentang/syarat'); ?>" class="btn-container">
+        <h3>Syarat & Ketentuan</h3>
+    </a>
 
-<a href="<?= base_url('Tentang/visimisi') ?>" class="btn-container">
-<div class="">
-    <h3>Misi & Misi</h3>
-</div>
-</a>
+      <div style="padding-left: 25px;padding-right: 25px;">
+        <div class="row justify-content-evenly">
+            <?php 
+                foreach ($this->db->query("SELECT * FROM data_sponsor")->result() as $r) {
+                    
+            ?>
+            <div class="produk-list">
+                <img src="<?php echo urladmin().$r->gambarsponsor ?>" />
+                
+            </div>
 
-
-<a href="<?= base_url('Tentang/syarat'); ?>" class="btn-container">
-<div class="">
-    <h3>Syarat & Ketentuan</h3>
-</div>
-</a>
-
-<!-- SPONSOR -->
-
-<div class="sponsor-container">
-<h3 style="font-size:16px; font-weight:500; text-align:center;">Disponsori oleh :</h3>
-
-<img class="sponsor-img" src="assets/img/icon/sponsor.png" alt="sponsor">
-</div>
-
-
-
+            <?php 
+        }
+            ?>
+            
+        </div>
+    </div>
 
 </div>

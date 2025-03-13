@@ -28,7 +28,7 @@
 
     .header-title {
         color: white;
-        font-size: 25px;
+        font-size: 16px;
         flex-grow: 1;
         text-align: center;
     }
@@ -120,7 +120,7 @@
     }
     @media (max-width: 480px) {
         .header-title {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .card-row {
@@ -150,7 +150,7 @@
     <div class="menu-saldo-container">
         <!-- Baris Pertama (3 Card) -->
         <div class="card-row">
-            <a href="<?= base_url('Saldo/isisaldo') ?>">
+            <a href="<?= base_url('saldo/isisaldo') ?>">
                 <div class="card-menu">
                     <div>
                         <img class="icon-menu" src="assets/img/icon/saldo.png" alt="icon-menu">
@@ -160,7 +160,7 @@
                     </div>
                 </div>
             </a>
-            <a href="<?= base_url('Saldo/tariksaldo') ?>">
+            <a href="<?= base_url('saldo/tariksaldo') ?>">
                 <div class="card-menu">
                     <div>
                         <img class="icon-menu" src="assets/img/icon/tariksaldo.png" alt="icon-menu">
@@ -170,7 +170,7 @@
                     </div>
                 </div>
             </a>
-            <a href="<?= base_url('Saldo/komisi') ?>">
+            <a href="<?= base_url('saldo/komisi') ?>">
                 <div class="card-menu">
                     <div>
                         <img class="icon-menu" src="assets/img/icon/komisi.png" alt="icon-menu">
@@ -184,7 +184,7 @@
 
         <!-- Baris Kedua (1 Card) -->
         <div class="card-row">
-            <a href="<?= base_url('Saldo/riwayattransaksi'); ?>">
+            <a href="<?= base_url('saldo/riwayattransaksi'); ?>">
                 <div class="card-menu">
                     <div>
                         <img class="icon-menu" src="assets/img/icon/riwayat.png" alt="icon-menu">

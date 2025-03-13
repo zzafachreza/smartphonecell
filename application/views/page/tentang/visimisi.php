@@ -1,16 +1,13 @@
 <style>
-    * {
+       * {
         margin: 0;
         padding: 0;
         font-family: 'Poppins', sans-serif;
         color: black;
-     
     }
 
     .container {
         padding: 10px;
-        width: 100%;
-        height: 100%;
     }
 
     header {
@@ -28,7 +25,7 @@
 
     .header-title {
         color: white;
-        font-size: 25px;
+        font-size: 16px;
         flex-grow: 1; /* Allow title to take available space */
         text-align: center; /* Center title */
     }
@@ -37,103 +34,44 @@
         width: 20px;
         height: 30px;
     }
-
-    .btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    max-width: 300px; /* Agar tombol tidak terlalu lebar di layar besar */
-    padding: 15px; /* Tambahkan padding agar tidak gepeng */
-    background-color: #0148A8;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    border-radius: 50px;
-    text-align: center;
-    text-decoration: none; /* Hilangkan underline pada <a> */
-    margin: 20px auto; /* Tengah tombol secara horizontal */
-}
-
-.btn-container h3 {
-    margin: 0; /* Hilangkan margin default dari <h3> */
-    font-size: 18px;
-    text-align: center;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-}
-
-
-.sponsor-container {
-    padding: 10px;
-    text-align: center;
-    margin-top: 20px;
-    align-items: center;
-    align-self: center;
-
-}
-
-.sponsor-img {
-    width: 371px;
-    height: 499px;
-}
-
-.visimisi-container {
-    padding: 10px;
-}
-
-.visi-container {
-    padding: 20px;
-}
-
-.visi-list {
-    list-style-type: decimal;
-    text-align: justify;
-}
-
-.misi-container {
-    padding: 20px;
-}
-
-.misi-list {
-    list-style-type: decimal;
-    text-align: justify;
-}
-
-
-    
-
-    @media (max-width: 480px) {
-        .header-title {
-            font-size: 18px; /* Further reduce font size for very small screens */
-            text-align: center; /* Center title */
-        }
-
-        .search-input {
-            font-size: 10px; /* Further reduce font size for input */
-            padding: 6px 10px; /* Further adjust padding */
-        }
-
-        .list-smartphone-container h3 {
-            font-size: 12px; /* Further reduce font size for list items */
-        }
-
-        nav {
-            flex-direction: flex; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-            padding: 5px; /* Reduce padding for nav */
-        }
-
-        .header-btn-back {
-            margin-bottom: 5px; /* Add space below the back button */
-        }
-
-        .arrow-left {
-            width: 16px; /* Adjust arrow size for small screens */
-            height: 24px; /* Adjust arrow size for small screens */
-        }
+  .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 500px; /* Batasi lebar untuk tampilan besar */
+        padding: 15px;
+        background-color: #0148A8;
+        color: white;
+        border-radius: 50px;
+        text-align: center;
+        text-decoration: none; /* Hilangkan underline */
+        margin: 10px auto; /* Tengah tombol */
     }
+
+    .btn-container h3{
+        font-size: 18px;
+        color: white;
+    }
+
+       .produk-list{
+
+        width: 30%;height: 60px;
+        border-radius: 8px;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        margin-left: 1.5%;
+        margin-right: 1.5%;
+        margin-bottom: 15px;
+        display: flex;
+   
+
+    }
+
+    .produk-list img{
+        width: 100%;
+        height:auto;
+    }
+
 </style>
 
 <header>
@@ -146,29 +84,25 @@
     </nav>
 </header>
 
-<div class="container">
+<div class="container p-4">
 
+  <?php
 
+    $r = $this->db->query("SELECT * FROM data_informasi")->row_object();
+    ?>
 <!-- SPONSOR -->
 
 <div class="visimisi-container">
 
 <h3 style="font-family: 'Poppins', sans-serif;">Visi</h3>
 <div class="visi-container">
-    <ul class="visi-list">
-        <li class="visi">Mengembangkan toko ritel smartphone modern dengan konsep pameran untuk memberikan pelayanan yang terbaik, didukung oleh sumber daya manusia yang kompeten dan mitra bisnis profesional untuk menambah kepuasan konsumen.</li>
-        <li  class="visi">Berkontribusi secara signifikan terhadap perkembangan ekonomi dan pemerataan kekayaan di Indonesia melalui aktivitas e-commerce</li>
-        <li class="visi">Menjadikan Indonesia sebagai basis ekonomi digital terbesar di Asia Tenggara.</li>
-    </ul>
+    <?php echo $r->visi ?>
 </div>
 
 
 <h3 style="font-family: 'Poppins', sans-serif;">Misi</h3>
 <div class="misi-container">
-    <ul class="misi-list">
-        <li class="misi">Meningkatkan penjualan (melalui Pengembangan sistem distribusi, promosi, dan penjualan yang lebih luas). </li>
-        <li  class="misi">Memberikan nilai tambah (value added) kepada pelanggan (memberi pelanggan manfaat ekstra melalui sistem online)</li>
-    </ul>
+    <?php echo $r->misi ?>
 </div>
 
 </div>

@@ -180,33 +180,70 @@
 
 <header>
     <nav>
-        <a class="header-btn-back" href="<?= base_url('Saldo') ?>">
+        <a class="header-btn-back" href="<?= base_url('saldo') ?>">
             <img class="arrow-left" src="../assets/img/icon/left-arrow.png" alt="arrow-back">
         </a>
         <h3 class="header-title">Isi Saldo</h3>
         <div style="padding: 10px;"></div>
     </nav>
 </header>
-<div class="container">
-    <!-- Container untuk Input Isi Saldo -->
-    <div class="input-container">
-        <label for="jumlah-saldo" class="input-label">Jumlah Saldo</label>
-        <input type="number" id="jumlah-saldo" class="input-field" placeholder="Masukkan jumlah saldo">
+<form enctype="multipart/form-data" method="POST" action="<?php echo site_url('saldo/topup') ?>">
+    <div class="container">
+    <div class="form-group">
+        <input type="hidden" name="fid_pengguna" value="<?php echo $_SESSION['id_pengguna'] ?>" />
+        <input type="hidden" name="tipe" value="Topup" />
+            <label for="">Nominal</label>
+            <input required autocomplete="off" class="form-control uang" type="text" name="nominal">
     </div>
+        <div class="form-group">
+    <label for="" style="font-weight: bold; display: block; margin-bottom: 10px;">Pilih Bank</label>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <?php foreach ($this->db->query("SELECT * FROM data_bank")->result() as $bb) { ?>
 
-    <!-- Select untuk Pilih Bank -->
-    <div class="input-container">
-        <label for="pilih-bank" class="input-label">Pilih Bank</label>
-        <div class="select-container">
-            <select id="pilih-bank" class="select-field">
-                <option value="" disabled selected>Pilih Bank</option>
-                <option value="BCA">Bank Central Asia (BCA)</option>
-                <option value="BNI">Bank Negara Indonesia (BNI)</option>
-                <option value="Muamalat">Bank Muamalat</option>
-            </select>
-        </div>
+            <label style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
+                          width: 48%; padding: 10px; border: 2px solid #ddd; border-radius: 10px; 
+                          box-shadow: 2px 2px 10px rgba(0,0,0,0.1); cursor: pointer; text-align: center;">
+                <input name="catatan" type="radio" value="Transfer ke <?php echo $bb->nama_bank ?>" 
+                       style="margin-bottom: 5px;">
+                <!-- <p style="margin: 5px 0; font-weight: bold;"><?php echo $bb->nama_bank ?></p> -->
+                <img src="<?php echo urladmin().$bb->gambarbank ?>" width="80" height="50" 
+                     style="object-fit: contain;">
+            </label>
+
+        <?php } ?>
     </div>
+   <div class="form-group">
 
-    <!-- Tombol Submit -->
-    <button onclick="window.location.href='<?= base_url('Saldo/confirm'); ?>'" type="submit" class="btn-submit">Selanjutnya</button>
+    <label for="gambar" style="font-weight: bold; display: block; margin-bottom: 5px;">Bukti Transfer</label>
+    <input class="form-control" type="file" id="gambar" name="bukti_transaksi" 
+           accept="image/*" onchange="previewImage(event)">
+
+    <img src="https://zavalabs.com/nogambar.jpg" id="gambar_preview" 
+         style="margin-top: 10px; width: 100%; max-height: 300px; object-fit: contain; border: 1px solid #ddd; padding: 5px;">
+
+    <button class="btn-submit">Simpan</button>
+    <div style="height:50px"></div>
+</div>
+</form>
+
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        var preview = document.getElementById("gambar_preview");
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+</div>
+
+
 </div>

@@ -28,7 +28,7 @@
 
         .header-title {
             color: white;
-            font-size: 25px;
+            font-size: 16px;
             flex-grow: 1; /* Allow title to take available space */
             text-align: center; /* Center title */
         }
@@ -125,7 +125,7 @@
 
         @media (max-width: 480px) {
             .header-title {
-                font-size: 18px; /* Further reduce font size for very small screens */
+                font-size: 16px; /* Further reduce font size for very small screens */
                 text-align: center; /* Center title */
             }
 
@@ -183,8 +183,100 @@
 
             }
         }
-    </style>
 
+
+        .riwayat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .riwayat-item .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .riwayat-item .icon {
+            width: 40px;
+            height: 40px;
+            background-color: #0148A8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .riwayat-item .icon2 {
+            width: 40px;
+            height: 40px;
+            background-color: #30B800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .riwayat-item .icon3 {
+            width: 40px;
+            height: 40px;
+            background-color: #FFB800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .riwayat-item .icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .riwayat-item .icon2 img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .riwayat-item .icon3 img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .riwayat-item .info h4 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .riwayat-item .info p {
+            font-size: 12px;
+            color: #777;
+            margin: 0;
+        }
+
+        .riwayat-item .right {
+            text-align: right;
+        }
+
+        .riwayat-item .right h4 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .riwayat-item .right p {
+            font-size: 12px;
+            color: #FFD700; /* Warna kuning */
+            margin: 0;
+        }
+    </style>
+<?php
+
+$hd = $this->db->query("SELECT SUM(nominal) as saldo FROM data_saldo WHERE tipe='Komisi' AND status='Berhasil' AND fid_pengguna='".$_SESSION['id_pengguna']."'")->row_object();
+
+
+
+?>
 
 <header>
         <nav>
@@ -199,20 +291,40 @@
     <div class="container">
         <!-- Teks Uang Senilai Rp.345.000 -->
         <div class="saldo-info">
-            <h3>Uang senilai Rp.345.000</h3>
+            <h3>Uang senilai Rp.<?php echo number_format($hd->saldo) ?></h3>
             <p>Komisimu saat ini</p>
         </div>
 
         <!-- Total Komisi -->
-        <div class="total-komisi">
-            <div class="row">
+        <?php
+
+        foreach ($this->db->query("SELECT * FROM data_saldo WHERE tipe='Komisi' AND status='Berhasil' AND fid_pengguna='".$_SESSION['id_pengguna']."'")->result() as $ko) {
+            // code...
+        
+        ?>
+          <div class="riwayat-item">
                 <div class="left">
-                    <p>Total komisi pada 26 Feb</p>
-                    <p class="subtext">Dibayarkan pada 26 Feb 2025</p>
+                    <div class="icon">
+                        <img src="../assets/img/icon/dompet.png" alt="wallet">
+                    </div>
+                    <div class="info">
+                        <h4>Komisi</h4>
+                        <p><?php echo Indonesia3Tgl($ko->tanggal) ?></p>
+                    </div>
                 </div>
                 <div class="right">
-                    +Rp30.000
-                </div>
+                    <h4>+Rp<?php echo number_format($ko->nominal) ?></h4>
+                    <?php 
+                        $warna = 'yellow'; // Default warna
+
+                        if ($ko->status == 'Berhasil') {
+                            $warna = 'green';
+                        } elseif ($ko->status == 'Gagal') {
+                            $warna = 'red';
+                        }
+                    ?>
+
+                    <p style="color: <?php echo $warna; ?>;"><?php echo htmlspecialchars($ko->status); ?></p>                </div>
             </div>
-        </div>
+        <?Php } ?>
     </div>

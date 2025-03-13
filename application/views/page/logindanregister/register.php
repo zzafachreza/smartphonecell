@@ -29,7 +29,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            padding: 20px;
+            padding: 10px;
             margin-top: 250px;
         }
 
@@ -134,19 +134,19 @@
 
             .login-container {
                 margin-top: 0;
-                padding: 10px;
+                padding: 0px;
                 height: auto;
             }
 
             .login-card {
                 width: 100%;
-                padding: 15px;
+                padding: 0px;
                 margin-top: 20px;
             }
 
           
         .header-reg {
-            padding: 10px;
+            padding: 0px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -225,13 +225,13 @@ function isMobile() {
                 <div class="header-reg">
                     <div class="btn-back">
                         <a href="<?= base_url('login'); ?>">
-                            <img src="assets/img/icon/arrow-back.png" alt="back" width="20px">
+                            <img src="assets/img/icon/arrow-back.png" alt="back" width="14px">
                         </a>
                     </div>
                     <div class="header-title-container">
                         <h3 class="header-title">Register</h3>
                     </div>
-                    <div style="padding: 10px;"></div>
+                    <div style="padding: 0px;"></div>
                 </div>
                 <center>
                     <?php if(isMobile()){ ?>
@@ -253,7 +253,7 @@ function isMobile() {
 
                         <div class="form-group">
                             <input type="number" 
-                            class="form-control" id="nomor_telepon" name="nomor_telepon" placeholder="Nomor Telepon" required>
+                            class="form-control" id="nomor_telepon" name="telepon" placeholder="Nomor Telepon" required>
                             <small class="text-danger"><?= form_error('nomor_telepon'); ?></small>
                         </div>
 
@@ -264,16 +264,22 @@ function isMobile() {
                         </div>
 
                         <div class="form-group">
-                            <select class="form-control" name="bank" id="bank" required>
+                            <select class="form-control" name="bank_pengguna" id="bank" required>
                                 <option value="">Pilih Bank</option>
-                                <option value="BCA">BCA</option>
-                                <option value="BNI">BNI</option>
+
+                                <?php
+                                foreach ($this->db->query("SELECT * FROM data_bank")->result() as $r) {
+                                ?>
+                                  <option><?php echo $r->nama_bank ?></option>
+
+                                <?php } ?>
+                               
                             </select>
                             <small class="text-danger"><?= form_error('bank'); ?></small>
                         </div>
 
                         <div class="form-group">
-                            <input type="number" class="form-control" id="nomor_rek" name="nomor_rek" placeholder="Nomr Rekening" required>
+                            <input type="number" class="form-control" id="nomor_rek" name="rekening_pengguna" placeholder="Nomr Rekening" required>
                             <small class="text-danger"><?= form_error('nomor_rek'); ?></small>
                         </div>
 
@@ -291,7 +297,7 @@ function isMobile() {
 
                         
                         <div class="form-group">
-                            <input type="text" class="form-control" id="kode_undangan" name="kode_undangan" placeholder="Konfirmasi Kata Sandi" required>
+                            <input type="text" class="form-control" id="kode_undangan" name="kode_undangan" placeholder="Kode Undangan" required>
                             <small class="text-danger"><?= form_error('kode_undangan'); ?></small>
                         </div>
 

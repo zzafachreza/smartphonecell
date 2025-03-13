@@ -111,36 +111,6 @@
         border: 0px;
     }
 
-    .footer-dashboard {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-width: 1205px; /* Maksimum lebar footer */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    background-color: #0148A8;
-    border-radius: 30px 30px 0 0;
-    z-index: 1000;
-    box-sizing: border-box; /* Menjaga padding dalam batasan lebar */
-    left: 50%; /* Posisikan di tengah */
-    transform: translateX(-50%); /* Geser ke tengah */
-}
-
-.icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1; /* Agar setiap icon memiliki ukuran yang sama */
-}
-
-.icon {
-    color: white;
-    font-size: 24px; /* Ukuran icon untuk desktop */
-    cursor: pointer;
-}
-
 
     @media only screen and (max-width: 480px) {
         .content-header h3 {
@@ -173,32 +143,9 @@
 
 
 
-  .footer-dashboard {
-            position: fixed;
-    bottom: 0;
-    max-width: 1205px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    background-color: #0148A8;
-    border-radius:30px 30px 0px 0px;
-    z-index: 1000;
-    box-sizing: border-box; /* Menjaga padding dalam batasan lebar */
-        }
+ 
 
-        .icon-container {
-            display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1; /* Agar setiap icon memiliki ukuran yang sama */
-        }
-        .icon {
-            color: white;
-    font-size: 30px; /* Sesuaikan ukuran icon */
-    cursor: pointer;
-        }
+        
 
         }
 
@@ -239,31 +186,26 @@
 
         <div class="form-group">
             <label for="">Alamat</label>
-            <input class="form-control" type="text" value="Jl. Banda No. 30, Kota Bandung, Jawa B.." disabled>
+            <input class="form-control" type="text" value="<?= $_SESSION['alamat']; ?>" disabled>
         </div>
 
 
         <div class="form-group">
-            <label for="">Pilih Bank</label>
-            <input class="form-control" type="text" value="Bank Central Central (BCA)" disabled>
+            <label for="">Bank</label>
+            <input class="form-control" type="text" value="<?= $_SESSION['bank_pengguna']; ?>" disabled>
         </div>
 
 
         <div class="form-group">
             <label for="">Nomor Rekening</label>
-            <input class="form-control" type="text" value="90734632735" disabled>
+            <input class="form-control" type="text" value="<?= $_SESSION['rekening_pengguna']; ?>" disabled>
         </div>
 
-
-        <div class="form-group">
-            <label for="">Kata Sandi</label>
-            <input class="form-control" type="text" value="********" disabled>
-        </div>
 
 
         <div class="form-group">
             <label for="">Input Kode Undangan</label>
-            <input class="form-control" type="text" value="SPC62158" disabled>
+            <input class="form-control" type="text" value="<?= $_SESSION['kode_undangan']; ?>" disabled>
         </div>
 
 
@@ -277,21 +219,6 @@
     </div>
 
 
-</div>
 
       
-<div class="footer-dashboard">
-            <div class="icon-container">
-             <a href="<?= base_url('Dashboard') ?>">
-             <i class="fas fa-home icon"></i>
-             </a>
-            </div>
-            <div class="icon-container">
-                <a href="https://wa.me/6281319456595">
-                    <img class="icon-footer" src="assets/img/icon/cs.png" alt="icon-cs">
-                </a>
-            </div>
-            <div class="icon-container">
-                <a href="<?= base_url('profile'); ?>"> <i class="fas fa-user-circle icon"></i></a>
-            </div>
-        </div>
+

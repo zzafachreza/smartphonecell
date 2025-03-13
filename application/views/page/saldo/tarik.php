@@ -80,23 +80,6 @@
     .input-container {
         margin-bottom: 20px; /* Jarak antara input */
     }
-    .input-label-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px; /* Jarak antara label dan input */
-}
-
-.info-text {
-    font-size: 14px;
-    color: #0148A8; /* Warna biru */
-    cursor: pointer;
-    text-decoration: none; /* Garis bawah untuk efek klik */
-}
-
-.info-text:hover {
-    opacity: 0.8; /* Efek hover */
-}
 
     .input-label {
         font-size: 16px;
@@ -197,42 +180,50 @@
 
 <header>
     <nav>
-        <a class="header-btn-back" href="<?= base_url('Saldo') ?>">
+        <a class="header-btn-back" href="<?= base_url('saldo') ?>">
             <img class="arrow-left" src="../assets/img/icon/left-arrow.png" alt="arrow-back">
         </a>
         <h3 class="header-title">Tarik Saldo</h3>
         <div style="padding: 10px;"></div>
     </nav>
 </header>
-<div class="container">
-    <!-- Container untuk Input Jumlah Saldo -->
-    <div class="input-container">
-        <div class="input-label-container">
-            <label for="jumlah-saldo" class="input-label">Input Jumlah Saldo</label>
-            <span class="info-text">Gunakan Informasi Akun</span>
-        </div>
-        <input type="number" id="jumlah-saldo" class="input-field" placeholder="Masukkan jumlah saldo">
+<h3 style="color: black; font-family: 'Poppins', sans-serif; font-size: 14px;text-align: center;margin-top: 20px;font-size: 20px;">Saldo Saya - Rp <?php echo number_format(saldoSaya())?></h3>
+<form enctype="multipart/form-data" method="POST" action="<?php echo site_url('saldo/tarik') ?>">
+    <div class="container">
+    <div class="form-group">
+        <input type="hidden" name="fid_pengguna" value="<?php echo $_SESSION['id_pengguna'] ?>" />
+        <input type="hidden" name="tipe" value="Tarik" />
+            <label for="">Nominal</label>
+            <input autocomplete="off" id="nominal" required class="form-control uang" type="text" name="nominal">
     </div>
 
-    <!-- Select untuk Pilih Bank -->
-    <div class="input-container">
-        <label for="pilih-bank" class="input-label">Pilih Bank</label>
-        <div class="select-container">
-            <select id="pilih-bank" class="select-field">
-                <option value="" disabled selected>Pilih Bank</option>
-                <option value="BCA">Bank Central Asia (BCA)</option>
-                <option value="BNI">Bank Negara Indonesia (BNI)</option>
-                <option value="Muamalat">Bank Muamalat</option>
-            </select>
-        </div>
+      <div class="form-group">
+   
+            <label for="">Informasi Tujuan BANK</label>
+            <input autocomplete="off" required class="form-control" readonly type="text" name="catatan" value="<?php echo $_SESSION['bank_pengguna'] ?> - <?php echo $_SESSION['rekening_pengguna'] ?>">
     </div>
 
-    <!-- Input Nomor Rekening -->
-    <div class="input-container">
-        <label for="nomor-rekening" class="input-label">Input Nomor Rekening</label>
-        <input type="number" id="nomor-rekening" class="input-field" placeholder="Masukkan nomor rekening">
-    </div>
 
-    <!-- Tombol Submit -->
-    <button  type="submit" class="btn-submit">Kirim</button>
+    <button id="btnSubmit" class="btn-submit">Simpan</button>
+    <div style="height:50px"></div>
+</div>
+</form>
+
+<script>
+    $("#nominal").change(function(){
+        var nominal = parseFloat($(this).val().replace(",",""));
+        console.log(nominal);
+        if(nominal > <?php echo saldoSaya() ?>){
+            alert('Maaf saldo tidak cukup !');
+            $("#btnSubmit").hide()
+        }else{
+            $("#btnSubmit").show()
+        }
+
+    });
+</script>
+
+</div>
+
+
 </div>
