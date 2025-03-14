@@ -239,6 +239,10 @@ function isMobile()
     return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
 
+
+
+$comp = $this->db->query("SELECT * FROM data_company limit 1")->row_object();
+
 ?>
 
 <body>
@@ -276,7 +280,7 @@ function isMobile()
                     <input autocomplete="off" required style="width: 100%" class="form-control" id="kode_undangan" name="kode_undangan" placeholder="Kode Undangan">
                     <small class="text-danger"><?= form_error('kode_undangan'); ?></small>
                 </div>
-                 <a href="#">
+                 <a href="https://wa.me/<?php echo $comp->tlp ?>">
                         <p style="font-family: 'Poppins', sans-serif;">Lupa Kata Sandi</p>
                     </a> 
                 <button class="btn btn-block" type="submit">Masuk</button>

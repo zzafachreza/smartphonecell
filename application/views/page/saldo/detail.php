@@ -177,54 +177,80 @@
         }
     }
 </style>
+<?php
 
+
+
+// print_r($saldo);
+
+                        $warna = 'orange'; // Default warna
+
+                        if ($saldo->status == 'Berhasil') {
+                            $warna = 'green';
+                        } elseif ($saldo->status == 'Gagal') {
+                            $warna = 'red';
+                        }
+
+
+                        if($saldo->tipe=='Topup'){
+                        	$tipe='Isi Saldo';
+                        	$MYURL = site_url();
+                        }elseif($saldo->tipe=='Tarik'){
+                        	$tipe='Tarik Saldo';
+                        	$MYURL = urladmin();
+                        } if($saldo->tipe=='Refund'){
+                        	$tipe='Refund';
+                        	$MYURL = 'none';                        }
+                
+
+?>
 <header>
     <nav>
-        <a class="header-btn-back" href="<?= base_url('saldo') ?>">
-            <img class="arrow-left" src="../assets/img/icon/left-arrow.png" alt="arrow-back">
+        <a class="header-btn-back" href="<?= base_url('saldo/riwayattransaksi') ?>">
+            <img class="arrow-left" src="<?php echo site_url('assets/img/icon/left-arrow.png') ?>" alt="arrow-back">
+            
         </a>
-        <h3 class="header-title">Isi Saldo</h3>
+        <h3 class="header-title">Detail <?php echo $tipe ?></h3>
         <div style="padding: 10px;"></div>
     </nav>
 </header>
 <form enctype="multipart/form-data" method="POST" action="<?php echo site_url('saldo/topup') ?>">
     <div class="container">
     <div class="form-group">
-        <input type="hidden" name="fid_pengguna" value="<?php echo $_SESSION['id_pengguna'] ?>" />
-        <input type="hidden" name="tipe" value="Topup" />
-            <label for="">Nominal</label>
-            <input required autocomplete="off" class="form-control uang" type="text" name="nominal">
+     <table class="table">
+     	<tr>
+     		<td align="left" class="text-black"><?php echo Indonesia3Tgl($saldo->tanggal) ?></td>
+     		<td align="right"><p style="color:<?php echo $warna; ?>"><?php echo $saldo->status ?></p></td>
+     	</tr>
+     	<tr>
+     		<td align="left" class="text-black">Jumlah</td>
+     		<td align="right"><p style="font-weight:bold;font-size: 20px;"><?php echo number_format($saldo->nominal)?></p></td>
+     	</tr>
+     	<tr>
+     		<td align="center" colspan="2" class="text-black"><?php echo $saldo->catatan ?></td>
+     		
+     	</tr>
+     	<?php
+
+     	if($tipe !=='Refund'){
+     	?>
+     	<tr>
+     		<td align="center" colspan="2" class="text-black">Bukti Transaksi</td>
+     		
+     	</tr>
+     	<tr>
+     		<td colspan="2">
+     			<img src="<?php echo $MYURL.$saldo->bukti_transaksi ?>" width="100%">
+     		</td>
+     	</tr>
+
+     <?php } ?>
+     </table>
+            
+            
+            
     </div>
-        <div class="form-group">
-    <label for="" style="font-weight: bold; display: block; margin-bottom: 10px;">Pilih Bank Perusahaan</label>
-    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-        <?php foreach ($this->db->query("SELECT * FROM data_bank")->result() as $bb) { ?>
-
-            <label style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
-                          width: 48%; padding: 10px; border: 2px solid #ddd; border-radius: 10px; 
-                          box-shadow: 2px 2px 10px rgba(0,0,0,0.1); cursor: pointer; text-align: center;">
-                <input name="catatan" type="radio" value="Transfer ke <?php echo $bb->nama_bank ?>" 
-                       style="margin-bottom: 5px;">
-                
-                <img src="<?php echo urladmin().$bb->gambarbank ?>" width="80" height="50" 
-                     style="object-fit: contain;">
-                     <p style="margin: 2px 0; font-weight: normal;"><?php echo $bb->rekening_bank ?></p>
-                     <p style="margin: 2px 0; font-weight: normal;font-size: small;">A/N <strong><?php echo $bb->atasnama_bank ?></strong></p>
-            </label>
-
-        <?php } ?>
-    </div>
-   <div class="form-group">
-
-    <label for="gambar" style="font-weight: bold; display: block; margin-bottom: 5px;">Bukti Transfer</label>
-    <input class="form-control" type="file" id="gambar" name="bukti_transaksi" 
-           accept="image/*" onchange="previewImage(event)">
-
-    <img src="https://zavalabs.com/nogambar.jpg" id="gambar_preview" 
-         style="margin-top: 10px; width: 100%; max-height: 300px; object-fit: contain; border: 1px solid #ddd; padding: 5px;">
-
-    <button class="btn-submit">Simpan</button>
-    <div style="height:50px"></div>
+   
 </div>
 </form>
 

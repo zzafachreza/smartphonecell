@@ -277,10 +277,12 @@ $hd = $this->db->query("SELECT * FROM data_paket WHERE id_paket='$id_paket'")->r
 
             
         </div>
-    </div>
- <a class="btn-beli" href="<?php echo site_url('misilevel/checkout/'.$id_paket) ?>">
-     <img src="<?php echo site_url('assets/img/icon/cart.png') ?>" width="20" style="margin-right: 10px;"> Beli Sekarang
-       </a>
+
+         <a style="background: #0148A8;color: white;" class="btn col-sm-12 mt-4" href="<?php echo site_url('misilevel/checkout/'.$id_paket) ?>">
+                <img src="<?php echo site_url('assets/img/icon/cart.png') ?>" width="20" style="margin-right: 10px;"> Beli Sekarang
+           </a>
+             </div>
+    
 
 
 <div style="height:60px"></div>

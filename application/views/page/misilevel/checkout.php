@@ -329,12 +329,18 @@ $komisi = $this->db->query("SELECT * FROM data_komisi WHERE level='".$hd->level.
                         ?>
 
         <p style="font-size: 25px;font-weight: bold;text-align: center;margin-top: 10px;">Rp <?php echo number_format($hd->harga_paket) ?></p>
+
+         <p style="font-size: 16px;font-weight: normal;text-align: center;margin-top: 0px;color: #0148A8;">Komisi - Rp <?php echo number_format($komisi->komisi) ?></p>
     </div>
 
 
- <a class="btn-beli" id="btnBayar" style="text-decoration: none;color: white;">
+<!--  <a class="btn-beli" id="btnBayar" style="text-decoration: none;color: white;">
      <img src="<?php echo site_url('assets/img/icon/cart.png') ?>" width="20" style="margin-right: 10px;"> Bayar Sekarang
-       </a>
+       </a> -->
+
+        <a style="background: #0148A8;color: white;" class="btn col-sm-12 mt-4" id="btnBayar" >
+                <img src="<?php echo site_url('assets/img/icon/cart.png') ?>" width="20" style="margin-right: 10px;"> Bayar Sekarang
+           </a>
 
 
 <div style="height:60px"></div>

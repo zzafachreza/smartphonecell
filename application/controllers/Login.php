@@ -47,8 +47,8 @@ class login extends CI_Controller
         }
 
         // Cari user berdasarkan username
-        $sql = "SELECT * FROM data_pengguna WHERE username = ? AND password = ?";
-        $query = $this->db->query($sql, [$username,$password]);
+        $sql = "SELECT * FROM data_pengguna WHERE username = ? AND password = ? AND kode_undangan=?";
+        $query = $this->db->query($sql, [$username,$password,$kode_undangan]);
         $user = $query->row_array();
 
         // Jika user ditemukan
@@ -58,7 +58,7 @@ class login extends CI_Controller
             
         } else {
             // Jika username tidak ditemukan
-            $this->session->set_flashdata('error', 'Username atau password salah !');
+            $this->session->set_flashdata('error', 'Username, Password atau Kode Undangan salah !');
             redirect('login');
         }
     }

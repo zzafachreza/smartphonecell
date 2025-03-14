@@ -307,7 +307,7 @@
             foreach ($this->db->query("SELECT * FROM data_saldo WHERE tipe='Topup' AND fid_pengguna='$_SESSION[id_pengguna]'")->result() as $rs) {
             ?>
 
-            <div class="riwayat-item">
+            <div class="riwayat-item" onclick="window.location.href='<?php echo site_url('saldo/detail/'.$rs->id_saldo) ?>'">
                 <div class="left">
                     <div class="icon">
                         <img src="../assets/img/icon/dompet.png" alt="wallet">
@@ -320,7 +320,7 @@
                 <div class="right">
                     <h4>+Rp<?php echo number_format($rs->nominal) ?></h4>
                     <?php 
-                        $warna = 'yellow'; // Default warna
+                        $warna = 'orange'; // Default warna
 
                         if ($rs->status == 'Berhasil') {
                             $warna = 'green';
@@ -347,7 +347,7 @@
             foreach ($this->db->query("SELECT * FROM data_saldo WHERE tipe='Tarik' AND fid_pengguna='$_SESSION[id_pengguna]'")->result() as $rs) {
             ?>
 
-            <div class="riwayat-item">
+            <div class="riwayat-item" onclick="window.location.href='<?php echo site_url('saldo/detail/'.$rs->id_saldo) ?>'">
                 <div class="left">
                     <div class="icon2">
                         <img src="../assets/img/icon/tarik.png" alt="wallet">
@@ -360,7 +360,7 @@
                 <div class="right">
                     <h4>+Rp<?php echo number_format($rs->nominal) ?></h4>
                     <?php 
-                        $warna = 'yellow'; // Default warna
+                        $warna = 'orange'; // Default warna
 
                         if ($rs->status == 'Berhasil') {
                             $warna = 'green';
@@ -382,7 +382,7 @@
             foreach ($this->db->query("SELECT * FROM data_saldo WHERE tipe='Refund' AND fid_pengguna='$_SESSION[id_pengguna]'")->result() as $rs) {
             ?>
 
-            <div class="riwayat-item">
+            <div class="riwayat-item" onclick="window.location.href='<?php echo site_url('saldo/detail/'.$rs->id_saldo) ?>'">
                 <div class="left">
                     <div class="icon3">
                         <img src="../assets/img/icon/refund.png" alt="wallet">
@@ -395,7 +395,7 @@
                 <div class="right">
                     <h4>+Rp<?php echo number_format($rs->nominal) ?></h4>
                     <?php 
-                        $warna = 'yellow'; // Default warna
+                        $warna = 'orange'; // Default warna
 
                         if ($rs->status == 'Berhasil') {
                             $warna = 'green';

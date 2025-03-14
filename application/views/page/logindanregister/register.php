@@ -279,7 +279,7 @@ function isMobile() {
                         </div>
 
                         <div class="form-group">
-                            <input type="number" class="form-control" id="nomor_rek" name="rekening_pengguna" placeholder="Nomr Rekening" required>
+                            <input type="number" class="form-control" id="nomor_rek" name="rekening_pengguna" placeholder="Nomor Rekening" required>
                             <small class="text-danger"><?= form_error('nomor_rek'); ?></small>
                         </div>
 

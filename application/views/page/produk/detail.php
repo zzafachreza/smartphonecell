@@ -71,4 +71,6 @@
         <h5><?php echo $r->nama_produk ?></h5>
         <p class="harga"><?php echo number_format($r->harga) ?></p>
         <p class="render"><?php echo $r->spesifikasi ?></p>
+        <p class="render"><?php echo $r->keterangan ?></p>
+        <div style="height:50px"></div>
 </div>

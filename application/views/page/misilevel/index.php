@@ -283,7 +283,7 @@ margin-bottom: 10px;
                  <?php
 
                 $level = $this->uri->segment(3);
-                $sql="SELECT * FROM data_beli a JOIN data_paket b ON a.fid_paket = b.id_paket";
+                $sql="SELECT * FROM data_beli a JOIN data_paket b ON a.fid_paket = b.id_paket WHERE a.fid_pengguna='".$_SESSION['id_pengguna']."'";
 
                 foreach ($this->db->query($sql)->result() as $r) {
 

@@ -300,7 +300,7 @@
 
       
 
-        .lihatproduk-container {
+    .lihatproduk-container {
             padding: 20px;
             /* Hapus display: flex; */
             display: block; /* Gunakan block agar elemen tidak sejajar horizontal */
@@ -390,8 +390,9 @@
 
 
       .menu-containerku {
-        width: 32%;
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+        width: 30%;
+/*        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;*/
+box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;   
         color: black;
         border-radius: 10px;
         justify-content: flex-start; /* Posisikan konten ke kiri */
@@ -484,7 +485,7 @@
             </div>
 
             <!-- Menu -->
-            <div class="row">
+            <div class="row justify-content-between p-2">
               
                     
                         <div onclick="window.location.href='<?= base_url('giftcard'); ?>'" class="menu-containerku">
