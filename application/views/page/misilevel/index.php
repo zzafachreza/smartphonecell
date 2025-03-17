@@ -316,14 +316,20 @@ margin-bottom: 10px;
 
                             <!-- HARGa -->
                              <h3 class="harga-bundle">Rp<?php echo number_format($r->harga_paket) ?></h3>
+                                    <?php  if($r->status_beli=='Open'){ ?>
+                                                                   <a  onclick="refund(<?php echo $r->harga_paket ?>,<?php echo $r->id_beli ?>)" class="btn-buy">
+                                                                        <div class="teks-btn-buy">Refund</div>
+                                                                        
+                                                                    </a>
 
-                             <?php  if($r->status_beli=='Berhasil'){ ?>
-                                <a  onclick="refund(<?php echo $r->harga_paket ?>,<?php echo $r->id_beli ?>)" class="btn-buy">
-                                    <div class="teks-btn-buy">Refund</div>
-                                </a>
+                                    <?php } ?>
+
+                             <?php  if($r->status_beli=='Proses'){ ?>
+                                <p style="color:orange;font-size: 12px">Proses</p>                            
+                              
                             <?php } ?>
-                             <?php  if($r->status_beli=='Refund'){ ?>
-                               <p style="color:green;font-size: 12px">Berhasil Refund</p>                            <?php } ?>
+                             <?php  if($r->status_beli=='Berhasil'){ ?>
+                               <p style="color:green;font-size: 12px">Berhasil</p>                            <?php } ?>
                         </div>
                     </div>
 

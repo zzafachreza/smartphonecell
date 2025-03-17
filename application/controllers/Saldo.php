@@ -524,8 +524,8 @@ public function uploadFoto($name_data,$ref_user){
     $total = $this->uri->segment(3);
     $id_beli = $this->uri->segment(4);
     $fid_pengguna = $_SESSION['id_pengguna'];
-    $sql1="UPDATE data_beli SET status_beli='Refund' WHERE id_beli='$id_beli'";
-       $sql2="INSERT INTO data_saldo(fid_pengguna,tipe,nominal,catatan,status) VALUES('$fid_pengguna','Refund','$total','Refund Paket Bundling','Proses')";
+    $sql1="UPDATE data_beli SET status_beli='Proses' WHERE id_beli='$id_beli'";
+       $sql2="INSERT INTO data_saldo(fid_pengguna,tipe,nominal,catatan,status) VALUES('$fid_pengguna','Refund','$total','Refund Paket Bundling#$id_beli','Proses')";
 
             if($this->db->query($sql1) && $this->db->query($sql2)){
                  $this->session->set_flashdata('update','Terima kasih, Transaksi Kamu Akan kami Proses, Mohon Ditunggu ya!');
