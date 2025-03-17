@@ -234,7 +234,7 @@
 
 
         <div class="form-group">
-            <label for="">Nomor Telepon</label>
+            <label for="">Nomor Telepon ( Contoh : 628123 . . . )</label>
             <input class="form-control" type="text" name="telepon" value="<?= $_SESSION['telepon']; ?>">
         </div>
 
@@ -244,10 +244,6 @@
             <input class="form-control" type="text" name="username" value="<?= $_SESSION['username']; ?>">
         </div>
 
-          <div class="form-group">
-            <label for="">Telepon</label>
-            <input class="form-control" type="text" name="telepon" value="<?= $_SESSION['telepon']; ?>">
-        </div>
 
           <div class="form-group">
              <label for="">Alamat</label>

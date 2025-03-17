@@ -252,9 +252,11 @@ function isMobile() {
                         </div>
 
                         <div class="form-group">
+
                             <input type="number" 
-                            class="form-control" id="nomor_telepon" name="telepon" placeholder="Nomor Telepon" required>
+                            class="form-control" id="nomor_telepon" name="telepon" placeholder="Nomor Telepon Contoh : 628123 . . ." required>
                             <small class="text-danger"><?= form_error('nomor_telepon'); ?></small>
+                            
                         </div>
 
                         <div class="form-group">
